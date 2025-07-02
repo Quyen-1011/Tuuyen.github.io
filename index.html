@@ -4,16 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nguyễn Tú Quyên Profile</title>
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+
   <style>
     body {
       margin: 0;
       font-family: "Roboto", sans-serif;
       background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
     }
 
     .profile-card {
@@ -23,6 +27,7 @@
       box-shadow: 0 10px 20px rgba(0,0,0,0.1);
       text-align: center;
       width: 300px;
+      margin-top: 30px;
     }
 
     .avatar {
@@ -75,24 +80,72 @@
     .facebook {
       background: linear-gradient(45deg, #4facfe, #00f2fe);
     }
+
+    /* Swiper styles */
+    .swiper {
+      width: 90%;
+      padding: 50px 0;
+    }
+
+    .swiper-slide {
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      text-align: left;
+    }
+
+    .swiper-slide img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+
+    .tag {
+      display: inline-block;
+      margin: 10px;
+      padding: 3px 10px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .tag.designer { background: pink; }
+    .tag.developer { background: lightblue; }
+    .tag.marketer { background: peachpuff; color: black; }
+
+    .swiper-slide h3 {
+      margin: 10px;
+      font-size: 14px;
+    }
+
+    .swiper-slide a {
+      margin: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      color: #333;
+    }
   </style>
 </head>
+
 <body>
+  <!-- Profile Card -->
   <div class="profile-card">
     <img src="20240929_131322_140.jpg" alt="Nguyễn Tú Quyên" class="avatar" />
     <h2>Nguyễn Tú Quyên</h2>
     <p>Developer & Designer</p>
     <div class="stats">
       <div>
-        <h3>120</h3>
+        <h3>0</h3>
         <p>Following</p>
       </div>
       <div>
-        <h3>5000</h3>
+        <h3>1,5k</h3>
         <p>Followers</p>
       </div>
       <div>
-        <h3>209</h3>
+        <h3>200</h3>
         <p>Posts</p>
       </div>
     </div>
@@ -102,5 +155,50 @@
       <a href="https://www.facebook.com/nquyen05.20" target="_blank" class="facebook">Facebook</a>
     </div>
   </div>
+
+  <!-- Swiper Carousel -->
+  <div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <img src="3.jpg" alt="Designer">
+        <span class="tag designer">Designer</span>
+        <h3>Lorem ipsum dolor sit explicabo adipisicing elit</h3>
+        <a href="#">→</a>
+      </div>
+      <div class="swiper-slide">
+        <img src="AnyConv.com__OIP (2).jpg" alt="Developer">
+        <span class="tag developer">Developer</span>
+        <h3>Lorem ipsum dolor sit explicabo adipisicing elit</h3>
+        <a href="#">→</a>
+      </div>
+      <div class="swiper-slide">
+        <img src="AnyConv.com__OIP (1).jpg" alt="Marketer">
+        <span class="tag marketer">Marketer</span>
+        <h3>Lorem ipsum dolor sit explicabo adipisicing elit</h3>
+        <a href="#">→</a>
+      </div>
+    </div>
+    <!-- Add navigation -->
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-pagination"></div>
+  </div>
+
+  <!-- Swiper JS -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script>
+    var swiper = new Swiper(".mySwiper", {
+      slidesPerView: 3,
+      spaceBetween: 30,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+  </script>
 </body>
 </html>
