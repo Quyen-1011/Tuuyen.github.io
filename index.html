@@ -29,17 +29,20 @@
       padding: 30px;
       box-shadow: 0 10px 20px rgba(0,0,0,0.1);
       text-align: center;
-      width: 400px;
+      width: 600px; /* tăng chiều rộng */
       margin: 30px 0;
       backdrop-filter: blur(10px);
+      max-width: 95vw;
     }
 
     .avatar {
-      width: 100px;
-      height: 100px;
+      width: 140px; /* lớn hơn */
+      height: 140px;
       border-radius: 50%;
       object-fit: cover;
       border: 4px solid #ff9a9e;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
 
     h2 {
@@ -79,8 +82,10 @@
 
     /* Swiper styles */
     .swiper {
-      width: 90%;
+      width: 100%;
+      max-width: 1200px; /* rộng tối đa */
       padding: 50px 0;
+      box-sizing: border-box;
     }
 
     .swiper-slide {
@@ -94,8 +99,9 @@
 
     .swiper-slide img {
       width: 100%;
-      height: 150px;
+      height: 220px; /* tăng chiều cao ảnh */
       object-fit: cover;
+      display: block;
     }
 
     .tag {
@@ -132,12 +138,28 @@
     }
 
     /* Responsive */
-    @media (max-width: 768px) {
-      .swiper {
-        padding: 30px 0;
+    @media (max-width: 900px) {
+      .profile-card {
+        width: 95vw;
       }
-      .swiper-slide {
-        font-size: 12px;
+      .swiper {
+        max-width: 100vw;
+        padding: 20px 0;
+      }
+      .swiper-slide img {
+        height: 160px;
+      }
+    }
+    @media (max-width: 600px) {
+      .profile-card {
+        width: 100vw;
+        padding: 15px;
+      }
+      .swiper {
+        padding: 10px 0;
+      }
+      .swiper-slide img {
+        height: 110px;
       }
     }
   </style>
@@ -146,7 +168,7 @@
 <body>
   <!-- Profile Card -->
   <div class="profile-card">
-    <img src="20240929_131322_140.jpg" alt="20240929_131322_140.jpg" class="" />
+    <img src="20240929_131322_140.jpg" alt="Avatar" class="avatar" />
     <h2>Nguyễn Tú Quyên</h2>
     <p>Developer & Designer</p>
     <div class="stats">
@@ -166,6 +188,7 @@
     <div class="buttons">
       <a href="https://www.facebook.com/nquyen05.20" class="message" target="_blank">Message</a>
       <a href="https://www.facebook.com/nquyen05.20" class="follow" target="_blank">Follow Me</a>
+    </div>
   </div>
 
   <!-- Swiper Carousel -->
