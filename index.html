@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nguyễn Tú Quyên Profile</title>
-  
+  <title>Nguyễn Tú Quyên Profile + Card Slider</title>
+
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Material+Symbols+Rounded" rel="stylesheet">
+
   <!-- Swiper CSS -->
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
 
@@ -30,7 +30,7 @@
       box-shadow: 0 10px 20px rgba(0,0,0,0.1);
       text-align: center;
       width: 300px;
-      margin-top: 30px;
+      margin: 30px 0;
       backdrop-filter: blur(10px);
     }
 
@@ -61,7 +61,6 @@
       margin: 0;
     }
 
-    .buttons button,
     .buttons a {
       border: none;
       padding: 10px 20px;
@@ -74,17 +73,9 @@
       display: inline-block;
     }
 
-    .message {
-      background: linear-gradient(45deg, #ff9a9e, #fad0c4);
-    }
-
-    .follow {
-      background: linear-gradient(45deg, #a1c4fd, #c2e9fb);
-    }
-
-    .facebook {
-      background: linear-gradient(45deg, #4facfe, #00f2fe);
-    }
+    .message { background: linear-gradient(45deg, #ff9a9e, #fad0c4); }
+    .follow { background: linear-gradient(45deg, #a1c4fd, #c2e9fb); }
+    .facebook { background: linear-gradient(45deg, #4facfe, #00f2fe); }
 
     /* Swiper styles */
     .swiper {
@@ -120,6 +111,8 @@
     .tag.designer { background: pink; }
     .tag.developer { background: lightblue; }
     .tag.marketer { background: peachpuff; color: black; }
+    .tag.gamer { background: lightgreen; color: black; }
+    .tag.editor { background: gold; color: black; }
 
     .swiper-slide h3 {
       margin: 10px;
@@ -132,13 +125,28 @@
       font-weight: bold;
       color: #333;
     }
+
+    /* Navigation Buttons */
+    .swiper-button-next, .swiper-button-prev {
+      color: #5372F0;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .swiper {
+        padding: 30px 0;
+      }
+      .swiper-slide {
+        font-size: 12px;
+      }
+    }
   </style>
 </head>
 
 <body>
   <!-- Profile Card -->
   <div class="profile-card">
-    <img src="assets/images/20240929_131322_140.jpg" alt="" class="profile-pic"" />
+    <img src="assets/images/20240929_131322_140.jpg" alt="Avatar" class="avatar" />
     <h2>Nguyễn Tú Quyên</h2>
     <p>Developer & Designer</p>
     <div class="stats">
@@ -156,9 +164,9 @@
       </div>
     </div>
     <div class="buttons">
-  <a href="https://www.tiktok.com/@nguyenquyen1011?_t=ZS-8xgeKk0JuUx&_r=1" class="message" target="_blank">Message</a>
-  <a href="https://www.tiktok.com/@nguyenquyen1011?_t=ZS-8xgeKk0JuUx&_r=1" class="follow" target="_blank">Follow Me</a>
-  <a href="https://www.facebook.com/nquyen05.20" target="_blank" class="facebook">Facebook</a>
+      <a href="https://www.facebook.com/nquyen05.20" class="message" target="_blank">Message</a>
+      <a href="https://www.facebook.com/nquyen05.20" class="follow" target="_blank">Follow Me</a>
+      <a href="https://www.facebook.com/nquyen05.20" target="_blank" class="facebook">Facebook</a>
     </div>
   </div>
 
@@ -166,20 +174,32 @@
   <div class="swiper mySwiper">
     <div class="swiper-wrapper">
       <div class="swiper-slide">
-        <img src="3.jpg" alt="Designer">
+        <img src="images/designer.jpg" alt="Designer">
         <span class="tag designer">Designer</span>
         <h3>Lorem ipsum dolor sit explicabo adipisicing elit</h3>
         <a href="#">→</a>
       </div>
       <div class="swiper-slide">
-        <img src="AnyConv.com__OIP (2).jpg" alt="Developer">
+        <img src="images/developer.jpg" alt="Developer">
         <span class="tag developer">Developer</span>
         <h3>Lorem ipsum dolor sit explicabo adipisicing elit</h3>
         <a href="#">→</a>
       </div>
       <div class="swiper-slide">
-        <img src="AnyConv.com__OIP (1).jpg" alt="Marketer">
+        <img src="images/marketer.jpg" alt="Marketer">
         <span class="tag marketer">Marketer</span>
+        <h3>Lorem ipsum dolor sit explicabo adipisicing elit</h3>
+        <a href="#">→</a>
+      </div>
+      <div class="swiper-slide">
+        <img src="images/gamer.jpg" alt="Gamer">
+        <span class="tag gamer">Gamer</span>
+        <h3>Lorem ipsum dolor sit explicabo adipisicing elit</h3>
+        <a href="#">→</a>
+      </div>
+      <div class="swiper-slide">
+        <img src="images/editor.jpg" alt="Editor">
+        <span class="tag editor">Editor</span>
         <h3>Lorem ipsum dolor sit explicabo adipisicing elit</h3>
         <a href="#">→</a>
       </div>
@@ -203,6 +223,11 @@
       navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
+      },
+      breakpoints: {
+        0: { slidesPerView: 1 },
+        768: { slidesPerView: 2 },
+        1024: { slidesPerView: 3 },
       },
     });
   </script>
