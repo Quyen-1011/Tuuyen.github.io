@@ -3,15 +3,123 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Profile + Memory Card Game</title>
+  <title>Dashboard + Profile + Game</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(to bottom right, #ffe0c3, #ffb6b9);
+      display: flex;
+      height: 100vh;
+      background: #0f172a;
+      color: white;
+      overflow: hidden;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 250px;
+      background: #1e293b;
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .sidebar .top {
+      padding: 20px;
+    }
+
+    .sidebar .logo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .sidebar .logo img {
+      width: 60px;
+      border-radius: 50%;
+    }
+
+    .sidebar .menu {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar .menu a {
+      color: white;
+      text-decoration: none;
+      padding: 15px 20px;
+      display: flex;
       align-items: center;
+      gap: 10px;
+    }
+
+    .sidebar .menu a:hover,
+    .sidebar .menu a.active {
+      background: #7c3aed;
+      border-radius: 10px;
+    }
+
+    .sidebar .bottom {
+      padding: 20px;
+      border-top: 1px solid #334155;
+    }
+
+    .dark-mode-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #334155;
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    .toggle-switch {
+      position: relative;
+      width: 40px;
+      height: 20px;
+    }
+
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 20px;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 14px; width: 14px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+
+    input:checked + .slider {
+      background-color: #7c3aed;
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(20px);
+    }
+
+    /* Main content */
+    .main {
+      flex: 1;
+      padding: 30px;
+      overflow-y: auto;
+      background: linear-gradient(to bottom right, #ffe0c3, #ffb6b9);
+      color: black;
     }
 
     /* Profile card */
@@ -20,9 +128,9 @@
       border-radius: 20px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       padding: 20px;
-      margin-top: 30px;
       text-align: center;
       width: 300px;
+      margin: 0 auto;
     }
 
     .profile-card img {
@@ -73,12 +181,12 @@
       color: white;
     }
 
-    /* Cards (info cards) */
+    /* Cards section */
     .cards {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      margin-top: 30px;
+      margin: 30px 0;
       gap: 20px;
     }
 
@@ -111,14 +219,13 @@
       margin: 0 10px 10px;
     }
 
-    /* Game */
+    /* Game section */
     .game-section {
       background: #6c63ff;
       padding: 30px 0;
       width: 100%;
       display: flex;
       justify-content: center;
-      margin-top: 50px;
     }
 
     .game-grid {
@@ -183,65 +290,85 @@
 </head>
 <body>
 
-  <!-- Profile Section -->
-  <div class="profile-card">
-    <img src="20240929_131322_140.jpg" alt="Avatar">
-    <h2>Nguyễn Tú Quyên</h2>
-    <p>Developer & Designer</p>
-    <div class="stats">
-      <div>
-        <strong>0</strong><br>Following
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="top">
+      <div class="logo">
+        <img src="logo.png" alt="Logo">
       </div>
-      <div>
-        <strong>1,5k</strong><br>Followers
-      </div>
-      <div>
-        <strong>200</strong><br>Posts
+      <div class="menu">
+        <a href="#" class="active"><i class="fa-solid fa-table-cells-large"></i> Dashboard</a>
+        <a href="#"><i class="fa-solid fa-chart-line"></i> Analytics</a>
+        <a href="#"><i class="fa-solid fa-bell"></i> Notifications</a>
+        <a href="#"><i class="fa-solid fa-star"></i> Favourites</a>
+        <a href="#"><i class="fa-solid fa-store"></i> Products</a>
+        <a href="#"><i class="fa-solid fa-users"></i> Customers</a>
       </div>
     </div>
-    <div class="buttons">
-      <button class="message">Message</button>
-      <a href="https://www.facebook.com/nquyen05.20" target="_blank" class="follow">Follow Me</a>
+    <div class="bottom">
+      <div class="dark-mode-toggle">
+        <span><i class="fa-solid fa-sun"></i> Dark Mode</span>
+        <label class="toggle-switch">
+          <input type="checkbox" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
     </div>
   </div>
 
-  <!-- Cards Section -->
-  <div class="cards">
-    <div class="card">
-      <img src="OIP (2).jpg" alt="Piano">
-      <div class="label">Piano</div>
-      <div class="description">Piano là một loại nhạc cụ phím (keyboard instrument)</div>
+  <!-- Main content -->
+  <div class="main">
+    <!-- Profile Section -->
+    <div class="profile-card">
+      <img src="20240929_131322_140.jpg" alt="Avatar">
+      <h2>Nguyễn Tú Quyên</h2>
+      <p>Developer & Designer</p>
+      <div class="stats">
+        <div><strong>0</strong><br>Following</div>
+        <div><strong>1,5k</strong><br>Followers</div>
+        <div><strong>200</strong><br>Posts</div>
+      </div>
+      <div class="buttons">
+        <button class="message">Message</button>
+        <a href="https://www.facebook.com/nquyen05.20" target="_blank" class="follow">Follow Me</a>
+      </div>
     </div>
 
-    <div class="card">
-      <img src="OIP (3).jpg" alt="Organ">
-      <div class="label">Church Organ</div>
-      <div class="description">Đàn nhà thờ thường gọi là đàn organ nhà thờ (Church Organ)</div>
+    <!-- Cards Section -->
+    <div class="cards">
+      <div class="card">
+        <img src="OIP (2).jpg" alt="Piano">
+        <div class="label">Piano</div>
+        <div class="description">Piano là một loại nhạc cụ phím (keyboard instrument)</div>
+      </div>
+
+      <div class="card">
+        <img src="OIP (3).jpg" alt="Organ">
+        <div class="label">Church Organ</div>
+        <div class="description">Đàn nhà thờ thường gọi là đàn organ nhà thờ (Church Organ)</div>
+      </div>
+
+      <div class="card">
+        <img src="OIP-_4_.jpg" alt="Church">
+        <div class="label">Church</div>
+        <div class="description">Nhà thờ (Church) là nơi thờ phượng Thiên Chúa, nơi cộng đoàn Kitô hữu tụ họp</div>
+      </div>
     </div>
 
-    <div class="card">
-      <img src="OIP-_4_.jpg" alt="Church">
-      <div class="label">Church</div>
-      <div class="description">Nhà thờ (Church) là nơi thờ phượng Thiên Chúa, nơi cộng đoàn Kitô hữu tụ họp</div>
+    <!-- Game Section -->
+    <div class="game-section">
+      <div class="game-grid" id="game-grid"></div>
     </div>
-  </div>
-
-  <!-- Game Section -->
-  <div class="game-section">
-    <div class="game-grid" id="game-grid"></div>
   </div>
 
   <script>
     // Memory game logic
     const emojis = ['🍎','🍌','🍇','🍓','🍑','🍍','🥝','🍉'];
-    let items = [...emojis, ...emojis]; // duplicate for pairs
-
-    // Shuffle array
+    let items = [...emojis, ...emojis];
     items.sort(() => 0.5 - Math.random());
 
     const grid = document.getElementById('game-grid');
 
-    // Generate cards
     items.forEach((emoji, index) => {
       const card = document.createElement('div');
       card.classList.add('card');
@@ -269,12 +396,10 @@
       } else {
         const secondCard = clicked;
         if (firstCard.dataset.emoji === secondCard.dataset.emoji) {
-          // Match found
           firstCard.classList.add('matched');
           secondCard.classList.add('matched');
           firstCard = null;
         } else {
-          // Not match
           lockBoard = true;
           setTimeout(() => {
             firstCard.classList.remove('flipped');
