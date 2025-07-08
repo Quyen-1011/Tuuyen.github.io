@@ -3,247 +3,181 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nguyễn Tú Quyên Profile + Card Slider</title>
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Material+Symbols+Rounded" rel="stylesheet">
-
-  <!-- Swiper CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
-
+  <title>Combined UI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
+      font-family: 'Roboto', sans-serif;
       margin: 0;
-      font-family: "Roboto", sans-serif;
-      background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 50%, #ff9a9e 100%);
-      background-attachment: fixed;
+      background: linear-gradient(135deg, #fbd3e9, #bb377d);
+    }
+    .container {
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-height: 100vh;
+      padding: 20px;
     }
-
+    /* Profile Card */
     .profile-card {
-      background: rgba(255, 255, 255, 0.8);
+      background: #fff;
       border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
       text-align: center;
-      width: 300px; /* tăng chiều rộng */
-      margin: 30px 0;
-      backdrop-filter: blur(10px);
-      max-width: 95vw;
+      padding: 20px;
+      width: 300px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      margin-bottom: 40px;
     }
-
-    .avatar {
-      width: 140px; /* lớn hơn */
-      height: 140px;
+    .profile-card img {
+      width: 100px;
+      height: 100px;
       border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid #ff9a9e;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      border: 4px solid #ff7eb3;
     }
-
-    h2 {
-      margin: 15px 0 5px;
+    .profile-card h2 {
+      margin: 10px 0 5px;
     }
-
-    p {
-      color: #666;
-      margin: 0 0 20px;
+    .profile-card p {
+      color: gray;
+      margin: 0 0 10px;
     }
-
-    .stats {
+    .profile-card .stats {
       display: flex;
-      justify-content: space-between;
-      margin-bottom: 20px;
+      justify-content: space-around;
+      margin-bottom: 10px;
     }
-
-    .stats h3 {
-      margin: 0;
-    }
-
-    .buttons a {
+    .profile-card button {
+      margin: 5px;
       border: none;
       padding: 10px 20px;
       border-radius: 20px;
-      margin: 5px;
       cursor: pointer;
-      font-weight: bold;
+    }
+    .message-btn {
+      background: pink;
       color: white;
-      text-decoration: none;
-      display: inline-block;
+    }
+    .follow-btn {
+      background: lightblue;
+      color: white;
     }
 
-    .message { background: linear-gradient(45deg, #ff9a9e, #fad0c4); }
-    .follow { background: linear-gradient(45deg, #a1c4fd, #c2e9fb); }
-
-    /* Swiper styles */
-    .swiper {
-      width: 100%;
-      max-width: 1200px; /* rộng tối đa */
-      padding: 50px 0;
-      box-sizing: border-box;
-    }
-
-    .swiper-slide {
-      background: rgba(255, 255, 255, 0.8);
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      overflow: hidden;
-      text-align: left;
-      backdrop-filter: blur(10px);
-    }
-
-    .swiper-slide img {
-      width: 100%;
-      height: 220px; /* tăng chiều cao ảnh */
-      object-fit: cover;
-      display: block;
-    }
-
-    .tag {
-      display: inline-block;
-      margin: 10px;
-      padding: 3px 10px;
+    /* Sidebar Dashboard */
+    .dashboard {
+      display: flex;
+      background: #1e1e2f;
+      color: white;
       border-radius: 10px;
-      font-size: 12px;
-      font-weight: bold;
-      color: white;
+      overflow: hidden;
+      margin-bottom: 40px;
+      width: 90%;
+      max-width: 800px;
+    }
+    .sidebar {
+      width: 200px;
+      background: #2f2f47;
+      padding: 20px 0;
+    }
+    .sidebar h3 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+    .sidebar li {
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+    .sidebar li:hover {
+      background: #3f3f5f;
+    }
+    .content {
+      flex: 1;
+      padding: 20px;
     }
 
-    .tag.designer { background: pink; }
-    .tag.developer { background: lightblue; }
-    .tag.marketer { background: peachpuff; color: black; }
-    .tag.gamer { background: lightgreen; color: black; }
-    .tag.editor { background: gold; color: black; }
-
-    .swiper-slide h3 {
-      margin: 10px;
-      font-size: 14px;
+    /* Game Grid */
+    .game-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 60px);
+      gap: 10px;
+      background: #6c63ff;
+      padding: 20px;
+      border-radius: 20px;
     }
-
-    .swiper-slide a {
-      margin: 10px;
-      text-decoration: none;
-      font-weight: bold;
-      color: #333;
-    }
-
-    /* Navigation Buttons */
-    .swiper-button-next, .swiper-button-prev {
-      color: #5372F0;
-    }
-
-    /* Responsive */
-    @media (max-width: 900px) {
-      .profile-card {
-        width: 95vw;
-      }
-      .swiper {
-        max-width: 100vw;
-        padding: 20px 0;
-      }
-      .swiper-slide img {
-        height: 160px;
-      }
-    }
-    @media (max-width: 600px) {
-      .profile-card {
-        width: 100vw;
-        padding: 15px;
-      }
-      .swiper {
-        padding: 10px 0;
-      }
-      .swiper-slide img {
-        height: 110px;
-      }
+    .game-grid div {
+      background: white;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 60px;
+      font-size: 24px;
+      color: #6c63ff;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
   </style>
 </head>
-
 <body>
-  <!-- Profile Card -->
-  <div class="profile-card">
-    <img src="20240929_131322_140.jpg" alt="Avatar" class="avatar" />
-    <h2>Nguyễn Tú Quyên</h2>
-    <p>Developer & Designer</p>
-    <div class="stats">
-      <div>
-        <h3>0</h3>
-        <p>Following</p>
+
+  <div class="container">
+    <!-- Profile Card -->
+    <div class="profile-card">
+      <img src="https://i.imgur.com/UYiroysl.jpg" alt="Profile">
+      <h2>Nguyễn Tú Quyên</h2>
+      <p>Developer & Designer</p>
+      <div class="stats">
+        <div>0 Following</div>
+        <div>1.5k Followers</div>
+        <div>200 Posts</div>
       </div>
-      <div>
-        <h3>1,5k</h3>
-        <p>Followers</p>
+<div>
+  <a href="https://www.facebook.com/nquyen05.20" target="_blank">
+    <button class="message-btn">Message</button>
+  </a>
+  <a href="https://www.facebook.com/nquyen05.20" target="_blank">
+    <button class="follow-btn">Follow Me</button>
+  </a>
+</div>
+    </div>
+
+    <!-- Dashboard -->
+    <div class="dashboard">
+      <div class="sidebar">
+        <h3>Menu</h3>
+        <ul>
+          <li>Dashboard</li>
+          <li>Analytics</li>
+          <li>Notifications</li>
+          <li>Favourites</li>
+          <li>Products</li>
+          <li>Customers</li>
+          <li>Settings</li>
+        </ul>
       </div>
-      <div>
-        <h3>200</h3>
-        <p>Posts</p>
+      <div class="content">
+        <h2>Dashboard Overview</h2>
+        <p>Welcome to your dashboard! Use the menu to navigate, toggle the sidebar, or switch between themes to personalize your experience.</p>
       </div>
     </div>
-    <div class="buttons">
-      <a href="https://www.facebook.com/nquyen05.20" class="message" target="_blank">Message</a>
-      <a href="https://www.facebook.com/nquyen05.20" class="follow" target="_blank">Follow Me</a>
+
+    <!-- Game Grid -->
+    <div class="game-grid" id="grid">
+      <!-- Cells generated by JS -->
     </div>
   </div>
 
-  <!-- Swiper Carousel -->
-  <div class="swiper mySwiper">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide">
-        <img src="OIP (1).jpg" alt="Designer">
-        <span class="tag designer">Designer</span>
-        <h3>UI/UX Designer – Thiết kế giao diện và trải nghiệm người dùng</h3>
-        <a href="https://encyclopedia2.thefreedictionary.com/Lorem+ipsum+(full+text)">→</a>
-      </div>
-      <div class="swiper-slide">
-        <img src="OIP (2).jpg" alt="Piano">
-        <span class="tag developer">Piano</span>
-        <h3>Piano là một loại nhạc cụ phím (keyboard instrument)</h3>
-        <a href="https://encyclopedia2.thefreedictionary.com/Lorem+ipsum+(full+text)">→</a>
-      </div>
-      <div class="swiper-slide">
-        <img src="OIP (3).jpg" alt="Church Organ">
-        <span class="tag marketer">Church Organ</span>
-        <h3> Đàn nhà thờ thường gọi là đàn organ nhà thờ (Church Organ)</h3>
-        <a href="https://trungnguyenpiano.com/blog/kien-thuc-am-nhac/dan-organ-nha-tho-21710/">→</a>
-      </div>
-      <div class="swiper-slide">
-        <img src="OIP-_4_.jpg" alt="Church">
-        <span class="tag marketer">ChurchChurch</span>
-        <h3> Nhà thờ (Church) là nơi thờ phượng Thiên Chúa, nơi cộng đoàn Kitô hữu tụ họp</h3>
-        <a href="https://www.traveloka.com/vi-vn/explore/destination/nha-tho-lon-ha-noi-acc/158921">→</a>
-      </div>
-    </div>
-    <!-- Add navigation -->
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-pagination"></div>
-  </div>
-
-  <!-- Swiper JS -->
-  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   <script>
-    var swiper = new Swiper(".mySwiper", {
-      slidesPerView: 3,
-      spaceBetween: 30,
-      pagination: {
-        el: ".swiper-pagination",
-        clickable: true,
-      },
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-      breakpoints: {
-        0: { slidesPerView: 1 },
-        768: { slidesPerView: 2 },
-        1024: { slidesPerView: 3 },
-      },
-    });
+    // Generate 16 game cells with '?'
+    const grid = document.getElementById('grid');
+    for(let i=0; i<16; i++) {
+      const cell = document.createElement('div');
+      cell.textContent = '?';
+      grid.appendChild(cell);
+    }
   </script>
+
 </body>
 </html>
