@@ -3,28 +3,153 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Profile</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Profile Card Slider</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom right, #ffe0c3, #ffb6b9);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .profile-card {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin-top: 30px;
+      text-align: center;
+      width: 300px;
+    }
+
+    .profile-card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 3px solid #ffb6b9;
+      object-fit: cover;
+    }
+
+    .profile-card h2 {
+      margin: 10px 0 5px;
+    }
+
+    .profile-card p {
+      color: gray;
+      margin: 0 0 15px;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 15px;
+    }
+
+    .stats div {
+      text-align: center;
+    }
+
+    .buttons button, .buttons a {
+      border: none;
+      border-radius: 20px;
+      padding: 10px 20px;
+      margin: 0 5px;
+      cursor: pointer;
+      font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .buttons .message {
+      background: #ffb6b9;
+      color: white;
+    }
+
+    .buttons .follow {
+      background: #add8e6;
+      color: white;
+    }
+
+    .cards {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 30px;
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      width: 250px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+
+    .card .label {
+      font-size: 12px;
+      color: white;
+      background: #ffb6b9;
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 10px;
+      margin: 10px;
+    }
+
+    .card .description {
+      font-size: 14px;
+      margin: 0 10px 10px;
+    }
+  </style>
 </head>
 <body>
-  <div class="sidebar">
-    <!-- Sidebar content -->
+  <div class="profile-card">
+    <img src="20240929_131322_140.jpg" alt="Avatar">
+    <h2>Nguyễn Tú Quyên</h2>
+    <p>Developer & Designer</p>
+    <div class="stats">
+      <div>
+        <strong>0</strong><br>Following
+      </div>
+      <div>
+        <strong>1,5k</strong><br>Followers
+      </div>
+      <div>
+        <strong>200</strong><br>Posts
+      </div>
+    </div>
+    <div class="buttons">
+      <button class="message">Message</button>
+      <a href="https://www.facebook.com/nquyen05.20" target="_blank" class="follow">Follow Me</a>
+    </div>
   </div>
 
-  <div class="main">
-    <div class="profile-card">
-      <img src="20240929_131322_140.jpg" alt="Avatar">
-      <h2>Nguyễn Tú Quyên</h2>
-      <p>Developer & Designer</p>
-      <div class="stats">
-        <div><strong>0</strong><br>Following</div>
-        <div><strong>1,5k</strong><br>Followers</div>
-        <div><strong>200</strong><br>Posts</div>
-      </div>
-      <div class="buttons">
-        <button class="message">Message</button>
-        <a href="https://www.facebook.com/nquyen05.20" target="_blank" class="follow">Follow Me</a>
-      </div>
+  <div class="cards">
+    <div class="card">
+      <img src="OIP (2).jpg" alt="Piano">
+      <div class="label">Piano</div>
+      <div class="description">Piano là một loại nhạc cụ phím (keyboard instrument)</div>
+    </div>
+
+    <div class="card">
+      <img src="OIP (3).jpg" alt="Organ">
+
+      <div class="label">Church Organ</div>
+      <div class="description">Đàn nhà thờ thường gọi là đàn organ nhà thờ (Church Organ)</div>
+    </div>
+
+    <div class="card">
+      <img src="OIP-_4_.jpg" alt="Church">
+      <div class="label">Church</div>
+      <div class="description">Nhà thờ (Church) là nơi thờ phượng Thiên Chúa, nơi cộng đoàn Kitô hữu tụ họp</div>
     </div>
   </div>
 </body>
