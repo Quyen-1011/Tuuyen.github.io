@@ -3,181 +3,153 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Combined UI</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <title>Profile Card Slider</title>
   <style>
     body {
-      font-family: 'Roboto', sans-serif;
       margin: 0;
-      background: linear-gradient(135deg, #fbd3e9, #bb377d);
-    }
-    .container {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom right, #ffe0c3, #ffb6b9);
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 20px;
     }
-    /* Profile Card */
+
     .profile-card {
       background: #fff;
       border-radius: 20px;
-      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       padding: 20px;
+      margin-top: 30px;
+      text-align: center;
       width: 300px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-      margin-bottom: 40px;
     }
+
     .profile-card img {
       width: 100px;
       height: 100px;
       border-radius: 50%;
-      border: 4px solid #ff7eb3;
+      border: 3px solid #ffb6b9;
+      object-fit: cover;
     }
+
     .profile-card h2 {
       margin: 10px 0 5px;
     }
+
     .profile-card p {
       color: gray;
-      margin: 0 0 10px;
+      margin: 0 0 15px;
     }
-    .profile-card .stats {
+
+    .stats {
       display: flex;
       justify-content: space-around;
-      margin-bottom: 10px;
-    }
-    .profile-card button {
-      margin: 5px;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 20px;
-      cursor: pointer;
-    }
-    .message-btn {
-      background: pink;
-      color: white;
-    }
-    .follow-btn {
-      background: lightblue;
-      color: white;
+      margin-bottom: 15px;
     }
 
-    /* Sidebar Dashboard */
-    .dashboard {
-      display: flex;
-      background: #1e1e2f;
-      color: white;
-      border-radius: 10px;
-      overflow: hidden;
-      margin-bottom: 40px;
-      width: 90%;
-      max-width: 800px;
-    }
-    .sidebar {
-      width: 200px;
-      background: #2f2f47;
-      padding: 20px 0;
-    }
-    .sidebar h3 {
+    .stats div {
       text-align: center;
-      margin-bottom: 30px;
-    }
-    .sidebar ul {
-      list-style: none;
-      padding: 0;
-    }
-    .sidebar li {
-      padding: 10px 20px;
-      cursor: pointer;
-    }
-    .sidebar li:hover {
-      background: #3f3f5f;
-    }
-    .content {
-      flex: 1;
-      padding: 20px;
     }
 
-    /* Game Grid */
-    .game-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 60px);
-      gap: 10px;
-      background: #6c63ff;
-      padding: 20px;
+    .buttons button, .buttons a {
+      border: none;
       border-radius: 20px;
+      padding: 10px 20px;
+      margin: 0 5px;
+      cursor: pointer;
+      font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
     }
-    .game-grid div {
-      background: white;
-      border-radius: 10px;
+
+    .buttons .message {
+      background: #ffb6b9;
+      color: white;
+    }
+
+    .buttons .follow {
+      background: #add8e6;
+      color: white;
+    }
+
+    .cards {
       display: flex;
       justify-content: center;
-      align-items: center;
-      height: 60px;
-      font-size: 24px;
-      color: #6c63ff;
-      cursor: pointer;
+      flex-wrap: wrap;
+      margin-top: 30px;
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      width: 250px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+
+    .card .label {
+      font-size: 12px;
+      color: white;
+      background: #ffb6b9;
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 10px;
+      margin: 10px;
+    }
+
+    .card .description {
+      font-size: 14px;
+      margin: 0 10px 10px;
     }
   </style>
 </head>
 <body>
-
-  <div class="container">
-    <!-- Profile Card -->
-    <div class="profile-card">
-      <img src="https://i.imgur.com/UYiroysl.jpg" alt="Profile">
-      <h2>Nguyễn Tú Quyên</h2>
-      <p>Developer & Designer</p>
-      <div class="20240929_131322_140.jpg">
-        <div>0 Following</div>
-        <div>1.5k Followers</div>
-        <div>200 Posts</div>
+  <div class="profile-card">
+    <img src="https://via.placeholder.com/100" alt="Avatar">
+    <h2>Nguyễn Tú Quyên</h2>
+    <p>Developer & Designer</p>
+    <div class="stats">
+      <div>
+        <strong>0</strong><br>Following
       </div>
-<div>
-  <a href="https://www.facebook.com/nquyen05.20" target="_blank">
-    <button class="message-btn">Message</button>
-  </a>
-  <a href="https://www.facebook.com/nquyen05.20" target="_blank">
-    <button class="follow-btn">Follow Me</button>
-  </a>
-</div>
-    </div>
-
-    <!-- Dashboard -->
-    <div class="dashboard">
-      <div class="sidebar">
-        <h3>Menu</h3>
-        <ul>
-          <li>Dashboard</li>
-          <li>Analytics</li>
-          <li>Notifications</li>
-          <li>Favourites</li>
-          <li>Products</li>
-          <li>Customers</li>
-          <li>Settings</li>
-        </ul>
+      <div>
+        <strong>1,5k</strong><br>Followers
       </div>
-      <div class="content">
-        <h2>Dashboard Overview</h2>
-        <p>Welcome to your dashboard! Use the menu to navigate, toggle the sidebar, or switch between themes to personalize your experience.</p>
+      <div>
+        <strong>200</strong><br>Posts
       </div>
     </div>
-
-    <!-- Game Grid -->
-    <div class="game-grid" id="grid">
-      <!-- Cells generated by JS -->
+    <div class="buttons">
+      <button class="message">Message</button>
+      <a href="https://www.facebook.com/nquyen05.20" target="_blank" class="follow">Follow Me</a>
     </div>
   </div>
 
-  <script>
-    // Generate 16 game cells with '?'
-    const grid = document.getElementById('grid');
-    for(let i=0; i<16; i++) {
-      const cell = document.createElement('div');
-      cell.textContent = '?';
-      grid.appendChild(cell);
-    }
-  </script>
+  <div class="cards">
+    <div class="card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/65/Grand_piano.jpg" alt="Piano">
+      <div class="label">Piano</div>
+      <div class="description">Piano là một loại nhạc cụ phím (keyboard instrument)</div>
+    </div>
 
+    <div class="card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Organ.jpg" alt="Organ">
+      <div class="label">Church Organ</div>
+      <div class="description">Đàn nhà thờ thường gọi là đàn organ nhà thờ (Church Organ)</div>
+    </div>
+
+    <div class="card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/St_Joseph%27s_Cathedral_Hanoi.jpg" alt="Church">
+      <div class="label">Church</div>
+      <div class="description">Nhà thờ (Church) là nơi thờ phượng Thiên Chúa, nơi cộng đoàn Kitô hữu tụ họp</div>
+    </div>
+  </div>
 </body>
 </html>
