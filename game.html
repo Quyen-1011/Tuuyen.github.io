@@ -85,22 +85,23 @@
     items.forEach((emoji, index) => {
       const card = document.createElement('div');
       card.classList.add('card');
-      card.innerHTML = 
+      card.innerHTML = `
         <div class="card-inner">
           <div class="card-front">${emoji}</div>
           <div class="card-back">?</div>
         </div>
-      ;
+      `;
       card.dataset.emoji = emoji;
       grid.appendChild(card);
     });
 
     let firstCard = null;
     let lockBoard = false;
+    let matchedCount = 0;
 
     grid.addEventListener('click', function(e) {
       const clicked = e.target.closest('.card');
-      if (!clicked || lockBoard || clicked.classList.contains('matched')) return;
+      if (!clicked || lockBoard || clicked.classList.contains('matched') || clicked === firstCard) return;
 
       clicked.classList.add('flipped');
 
@@ -113,6 +114,15 @@
           firstCard.classList.add('matched');
           secondCard.classList.add('matched');
           firstCard = null;
+          matchedCount += 2;
+
+          // Check win
+          if (matchedCount === items.length) {
+            setTimeout(() => {
+              alert("🎉 Bạn đã thắng!");
+              location.reload();
+            }, 500);
+          }
         } else {
           // Not match
           lockBoard = true;
