@@ -1,3 +1,66 @@
-<a href="dashboard.html"><i class="fa-solid fa-table-cells-large"></i> Dashboard</a>
-<a href="profile.html"><i class="fa-solid fa-user"></i> Profile</a>
-<a href="game.html"><i class="fa-solid fa-gamepad"></i> Game</a>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menu Navigation</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0f172a;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .menu-container {
+      background: #1e293b;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      text-align: center;
+      width: 300px;
+    }
+
+    .menu-container h1 {
+      margin-bottom: 30px;
+      font-size: 24px;
+      color: #7c3aed;
+    }
+
+    .menu-container a {
+      display: block;
+      background: #334155;
+      color: white;
+      text-decoration: none;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 10px;
+      font-size: 18px;
+      transition: background 0.3s;
+    }
+
+    .menu-container a i {
+      margin-right: 10px;
+    }
+
+    .menu-container a:hover {
+      background: #7c3aed;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="menu-container">
+    <h1>Menu</h1>
+    <a href="dashboard.html"><i class="fa-solid fa-table-cells-large"></i> Dashboard</a>
+    <a href="profile.html"><i class="fa-solid fa-user"></i> Profile</a>
+    <a href="game.html"><i class="fa-solid fa-gamepad"></i> Game</a>
+  </div>
+
+</body>
+</html>
