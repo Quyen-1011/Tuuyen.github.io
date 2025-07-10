@@ -3,256 +3,160 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard Full with Profile</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Profile Nguyễn Tú Quyên</title>
   <style>
     body {
       margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #fbc2eb, #a6c1ee);
       font-family: sans-serif;
-      background: #0f172a;
-      color: white;
-      display: flex;
-      height: 100vh;
-    }
-    .sidebar {
-      width: 250px;
-      background: #1e293b;
       display: flex;
       flex-direction: column;
-      padding: 10px;
       align-items: center;
     }
-    .sidebar img {
-      width: 120px;
-      margin-bottom: 10px;
-      border-radius: 10px;
-    }
-    .sidebar h2 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .sidebar a {
-      padding: 10px;
-      color: white;
-      text-decoration: none;
-      display: block;
-      border-radius: 5px;
-      width: 100%;
-      text-align: left;
-    }
-    .sidebar a:hover, .sidebar a.active {
-      background: #7c3aed;
-    }
-    .main {
-      flex: 1;
-      padding: 20px;
-      overflow-y: auto;
-    }
-    .page { display: none; }
-    .page.active { display: block; }
-
-    /* Profile page */
-    #profile { display: flex; flex-direction: column; align-items: center; }
-    #profile img { width: 150px; border-radius: 50%; margin-bottom: 20px; }
-    #profile h1 { margin: 10px 0; }
-    #profile p { max-width: 400px; text-align: center; }
-
-    /* Draw Canvas */
-    #draw canvas {
-      border: 2px solid white;
+    .profile-card {
       background: white;
-      cursor: crosshair;
+      border-radius: 20px;
+      padding: 20px;
+      width: 300px;
+      text-align: center;
+      margin-top: 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
-
-    /* Piano styles */
-    #piano { background: #e3f2fd; display: flex; justify-content: center; align-items: center; height: calc(100vh - 40px); }
-    .wrapper { background: #222; color: #ccc; padding: 20px; border-radius: 25px; text-align: center; }
-    .wrapper header { display: flex; justify-content: center; margin-bottom: 10px; }
-    .wrapper header h2 { color: white; margin: 0; }
-    .piano-keys { display: flex; justify-content: center; margin-top: 10px; }
-    .key { border: 1px solid black; height: 200px; width: 40px; background: white; margin: 0 2px; border-radius: 5px; position: relative; cursor: pointer; }
-    .key.black { background: black; height: 120px; width: 30px; position: absolute; top: 0; z-index: 1; border-radius: 0 0 5px 5px; }
-    .key-container { position: relative; }
-
-    /* Image Editor styles */
-    #image-editor { background: #e6f3fb; display: flex; justify-content: center; align-items: center; height: calc(100vh - 40px); }
-    .container { background: white; padding: 20px 40px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); display: flex; gap: 30px; color: black; }
-    .editor-left { display: flex; flex-direction: column; gap: 20px; }
-    .editor-left h2 { margin: 0; }
-    .filters button { padding: 10px 20px; border: none; border-radius: 5px; background: #f0f0f0; cursor: pointer; }
-    .filters button.active { background: #c5c9ff; color: #fff; }
-    .slider-container { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-    .slider-container input[type=range] { width: 150px; }
-    .rotate-flip { display: flex; gap: 10px; }
-    .rotate-flip button { padding: 10px; border: none; border-radius: 5px; background: #f0f0f0; cursor: pointer; }
-    .reset-btn { padding: 10px 20px; border: none; border-radius: 5px; background: #e0e0e0; cursor: pointer; }
-    .editor-right { background: #f3f3f3; width: 300px; height: 300px; display: flex; justify-content: center; align-items: center; border-radius: 5px; flex-direction: column; }
-    .editor-right img { max-width: 100%; max-height: 100%; }
-    .bottom-btns { margin-top: 20px; display: flex; gap: 20px; }
-    .bottom-btns button { padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
-    .choose { background: #555; color: #fff; }
-    .save { background: #c5c9ff; color: #fff; }
-
-    /* Memory Game styles */
-    #game { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
-    .card {
+    .profile-card img {
       width: 100px;
       height: 100px;
-      background: #444;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 40px;
-      cursor: pointer;
+      border-radius: 50%;
+      border: 3px solid #f06292;
+      object-fit: cover;
+      margin-bottom: 10px;
     }
-    .matched { background: #7c3aed; }
+    .profile-card h1 {
+      margin: 10px 0 5px;
+      font-size: 22px;
+    }
+    .profile-card p {
+      color: gray;
+      margin: 5px 0 15px;
+    }
+    .stats {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+    }
+    .stats div {
+      text-align: center;
+    }
+    .stats div span {
+      display: block;
+      font-weight: bold;
+    }
+    .btns {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 20px;
+    }
+    .btns button {
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .btn-message {
+      background: #f06292;
+      color: white;
+    }
+    .btn-follow {
+      background: #81d4fa;
+      color: white;
+    }
+
+    /* Posts section */
+    .posts {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .post-card {
+      width: 250px;
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    .post-card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+    .post-content {
+      padding: 10px;
+    }
+    .post-content h4 {
+      margin: 5px 0;
+    }
+    .post-content p {
+      font-size: 14px;
+      color: #555;
+    }
+    .tag {
+      background: #eee;
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 10px;
+      font-size: 12px;
+      margin-bottom: 5px;
+    }
   </style>
 </head>
 <body>
 
-  <div class="sidebar">
-    <img src="logo.png" alt="Logo">
-    <h2>ĐH Nguyễn Tất Thành</h2>
-    <a href="#" class="menu-item active" data-page="profile"><i class="fa-solid fa-user"></i> Profile</a>
-    <a href="#" class="menu-item" data-page="draw"><i class="fa-solid fa-paint-brush"></i> Draw</a>
-    <a href="#" class="menu-item" data-page="game"><i class="fa-solid fa-gamepad"></i> Game</a>
-    <a href="#" class="menu-item" data-page="piano"><i class="fa-solid fa-music"></i> Piano</a>
-    <a href="#" class="menu-item" data-page="image-editor"><i class="fa-solid fa-image"></i> Image Editor</a>
-  </div>
-
-  <div class="main">
-    <div id="profile" class="page active">
-      <img src="avatar.jpg" alt="Your Avatar">
-      <h1>Nguyễn Tú Quyên</h1>
-      <p>Sinh viên ngành CNTT - Đại học Nguyễn Tất Thành.<br>Yêu thích lập trình web, thiết kế UI, và học piano.</p>
+  <div class="profile-card">
+    <img src="20240929_131322_140.jpg" alt="Avatar Nguyễn Tú Quyên">
+    <h1>Nguyễn Tú Quyên</h1>
+    <p>Developer & Designer</p>
+    <div class="stats">
+      <div><span>0</span>Following</div>
+      <div><span>1.5k</span>Followers</div>
+      <div><span>200</span>Posts</div>
     </div>
-
-    <div id="draw" class="page">
-      <h1>Draw</h1>
-      <canvas id="canvas" width="500" height="400"></canvas>
-    </div>
-
-    <div id="game" class="page">
-      <h1>Memory Flip Game</h1>
-      <div id="memory-game"></div>
-    </div>
-
-    <div id="piano" class="page">
-      <div class="wrapper">
-        <header><h2>Playable PIANO</h2></header>
-        <div class="piano-keys">
-          <!-- Piano keys -->
-          <div class="key-container"><div class="key white" data-note="C"></div><div class="key black" data-note="C#"></div></div>
-          <div class="key-container"><div class="key white" data-note="D"></div><div class="key black" data-note="D#"></div></div>
-          <div class="key-container"><div class="key white" data-note="E"></div></div>
-          <div class="key-container"><div class="key white" data-note="F"></div><div class="key black" data-note="F#"></div></div>
-          <div class="key-container"><div class="key white" data-note="G"></div><div class="key black" data-note="G#"></div></div>
-          <div class="key-container"><div class="key white" data-note="A"></div><div class="key black" data-note="A#"></div></div>
-          <div class="key-container"><div class="key white" data-note="B"></div></div>
-        </div>
-      </div>
-    </div>
-
-    <div id="image-editor" class="page">
-      <div class="container">
-        <div class="editor-left">
-          <h2>Easy Image Editor</h2>
-          <div class="filters">
-            <button class="active">Brightness</button>
-            <button>Saturation</button>
-            <button>Inversion</button>
-            <button>Grayscale</button>
-          </div>
-          <div class="slider-container">
-            <label for="brightness">Brightness</label>
-            <input type="range" id="brightness" min="0" max="200" value="100">
-            <span>100%</span>
-          </div>
-          <div class="rotate-flip">
-            <button>&#8634;</button>
-            <button>&#8635;</button>
-            <button>&#8596;</button>
-            <button>&#8597;</button>
-          </div>
-          <button class="reset-btn">RESET FILTERS</button>
-        </div>
-        <div class="editor-right">
-          <p>Choose Image to Edit</p>
-        </div>
-      </div>
-      <div class="bottom-btns">
-        <button class="choose">CHOOSE IMAGE</button>
-        <button class="save">SAVE IMAGE</button>
-      </div>
+    <div class="btns">
+      <button class="btn-message">Message</button>
+      <button class="btn-follow">Follow Me</button>
     </div>
   </div>
 
-  <script>
-    // Sidebar switching
-    const menuItems = document.querySelectorAll('.menu-item');
-    menuItems.forEach(item => {
-      item.addEventListener('click', e => {
-        e.preventDefault();
-        menuItems.forEach(i => i.classList.remove('active'));
-        item.classList.add('active');
-        const page = item.getAttribute('data-page');
-        document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-        document.getElementById(page).classList.add('active');
-      });
-    });
+  <div class="posts">
+    <div class="post-card">
+      <img src="OIP (2).jpg" alt="Piano">
+      <div class="post-content">
+        <div class="tag">Piano</div>
+        <h4>Piano là một loại nhạc cụ phím</h4>
+        <p>Piano là một loại nhạc cụ phím (keyboard instrument)...</p>
+      </div>
+    </div>
 
-    // Piano sounds
-    const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
-    const audioElements = {};
-    notes.forEach(note => audioElements[note] = new Audio(`sounds/${note}.mp3`));
-    document.querySelectorAll('.key').forEach(key => {
-      key.addEventListener('click', () => {
-        const note = key.getAttribute('data-note');
-        const audio = audioElements[note];
-        if (audio) { audio.currentTime = 0; audio.play(); }
-      });
-    });
+    <div class="post-card">
+      <img src="OIP (3).jpg" alt="Organ">
+      <div class="post-content">
+        <div class="tag">Church Organ</div>
+        <h4>Đàn nhà thờ (organ)</h4>
+        <p>Đàn nhà thờ thường gọi là đàn organ nhà thờ (Church Organ)...</p>
+      </div>
+    </div>
 
-    // Canvas draw
-    const canvas = document.getElementById('canvas');
-    const ctx = canvas.getContext('2d');
-    let drawing = false;
-    canvas.addEventListener('mousedown', () => drawing = true);
-    canvas.addEventListener('mouseup', () => drawing = false);
-    canvas.addEventListener('mousemove', e => {
-      if (!drawing) return;
-      ctx.fillStyle = 'black';
-      ctx.fillRect(e.offsetX, e.offsetY, 2, 2);
-    });
-
-    // Memory Game
-    const gameContainer = document.getElementById('memory-game');
-    const emojis = ['🍎','🍌','🍒','🍇','🍉','🍓'];
-    let cards = [...emojis, ...emojis].sort(() => Math.random() - 0.5);
-    let firstCard = null;
-    cards.forEach(emoji => {
-      const div = document.createElement('div');
-      div.classList.add('card');
-      div.dataset.emoji = emoji;
-      div.textContent = '?';
-      div.addEventListener('click', () => {
-        if (div.textContent !== '?') return;
-        div.textContent = emoji;
-        if (!firstCard) {
-          firstCard = div;
-        } else {
-          if (firstCard.dataset.emoji === div.dataset.emoji) {
-            firstCard.classList.add('matched');
-            div.classList.add('matched');
-          } else {
-            setTimeout(() => { firstCard.textContent = '?'; div.textContent = '?'; }, 800);
-          }
-          firstCard = null;
-        }
-      });
-      gameContainer.appendChild(div);
-    });
-  </script>
+    <div class="post-card">
+      <img src="OIP-_4_.jpg" alt="Church">
+      <div class="post-content">
+        <div class="tag">Church</div>
+        <h4>Nhà thờ</h4>
+        <p>Nhà thờ (Church) là nơi thờ phượng Thiên Chúa...</p>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>
