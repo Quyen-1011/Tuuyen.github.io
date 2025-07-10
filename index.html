@@ -20,6 +20,12 @@
       display: flex;
       flex-direction: column;
       padding: 10px;
+      align-items: center;
+    }
+    .sidebar img {
+      width: 120px;
+      margin-bottom: 10px;
+      border-radius: 10px;
     }
     .sidebar h2 {
       text-align: center;
@@ -31,6 +37,8 @@
       text-decoration: none;
       display: block;
       border-radius: 5px;
+      width: 100%;
+      text-align: left;
     }
     .sidebar a:hover, .sidebar a.active {
       background: #7c3aed;
@@ -60,6 +68,7 @@
 <body>
 
   <div class="sidebar">
+    <img src="logo.png" alt="Logo">
     <h2>Dashboard</h2>
     <a href="#" class="menu-item active" data-page="overview"><i class="fa-solid fa-table-cells-large"></i> Dashboard</a>
     <a href="#" class="menu-item" data-page="draw"><i class="fa-solid fa-paint-brush"></i> Draw</a>
