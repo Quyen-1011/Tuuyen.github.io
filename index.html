@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Dashboard - Nguyễn Tú Quyên</title>
   <style>
     * {
@@ -65,6 +65,9 @@
       background: linear-gradient(to right, #fbc2eb, #a6c1ee);
       color: #111;
       overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
     }
 
     .main h1 {
@@ -86,8 +89,8 @@
       padding: 20px;
       width: 300px;
       text-align: center;
-      margin-bottom: 30px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      color: #111;
     }
 
     .profile-card img {
@@ -153,7 +156,7 @@
       flex-wrap: wrap;
       justify-content: flex-start;
       gap: 20px;
-      margin-bottom: 40px;
+      color: #111;
     }
 
     .post-card {
@@ -162,6 +165,7 @@
       border-radius: 15px;
       overflow: hidden;
       box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      color: #111;
     }
 
     .post-card img {
@@ -191,76 +195,107 @@
       border-radius: 10px;
       font-size: 12px;
       margin-bottom: 5px;
+      color: #555;
     }
 
-    /* Drawing app styles */
-    .drawing-container {
+    /* DRAW SECTION */
+    .draw-section {
       background: white;
-      border-radius: 20px;
+      border-radius: 15px;
       padding: 20px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      max-width: 900px;
-      margin: 0 auto 50px auto;
       color: #111;
+      display: flex;
+      gap: 20px;
+      max-width: 900px;
+      flex-wrap: wrap;
     }
 
-    .drawing-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    .draw-controls {
+      width: 180px;
+      font-family: Arial, sans-serif;
+      user-select: none;
+    }
+
+    .draw-controls div {
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    .draw-controls label {
+      display: block;
+      margin-bottom: 6px;
+      cursor: pointer;
+      font-weight: normal;
+      color: #222;
+    }
+
+    .draw-controls input[type="checkbox"],
+    .draw-controls input[type="radio"] {
+      margin-right: 6px;
+      cursor: pointer;
+    }
+
+    .draw-controls button {
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 14px;
+    }
+
+    .draw-controls button:hover {
+      text-decoration: underline;
+    }
+
+    .color-circle {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      display: inline-block;
+    }
+
+    .color-circle.selected {
+      border: 2px solid #444;
+    }
+
+    #brushSize {
+      width: 100%;
       margin-bottom: 15px;
     }
 
-    .colors {
-      display: flex;
-      gap: 10px;
-    }
-
-    .color-btn {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      border: 2px solid #ddd;
-      cursor: pointer;
-      transition: border-color 0.3s;
-    }
-
-    .color-btn.selected {
-      border-color: #7c3aed;
-      box-shadow: 0 0 10px #7c3aed;
-    }
-
-    .tools {
-      display: flex;
-      gap: 10px;
-    }
-
-    .btn-clear {
-      background: #7c3aed;
-      border: none;
-      color: white;
-      padding: 8px 15px;
-      border-radius: 10px;
-      cursor: pointer;
+    #clearCanvas, #saveImage {
+      width: 100%;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      background: none;
       font-weight: bold;
-      transition: background 0.3s;
+      margin-bottom: 10px;
+      user-select: none;
     }
 
-    .btn-clear:hover {
-      background: #5b21b6;
+    #saveImage {
+      background: #4a90e2;
+      color: white;
+      border: none;
     }
 
-    canvas {
-      border: 2px solid #7c3aed;
-      border-radius: 15px;
+    #drawCanvas {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background: white;
+      cursor: crosshair;
+      flex-grow: 1;
+      max-width: 600px;
+      max-height: 400px;
       width: 100%;
       height: 400px;
-      cursor: crosshair;
-      display: block;
     }
 
     /* Responsive */
-    @media(max-width: 768px){
+    @media (max-width: 768px) {
       body {
         flex-direction: column;
       }
@@ -275,9 +310,19 @@
       .posts {
         justify-content: center;
       }
-      .drawing-container {
+      .draw-section {
         max-width: 100%;
-        padding: 15px;
+        flex-direction: column;
+      }
+      .draw-controls {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      #drawCanvas {
+        max-width: 100%;
+        height: 300px;
       }
     }
   </style>
@@ -286,19 +331,19 @@
 
   <div class="sidebar">
     <div class="logo">
-      <img src="logo.png" alt="Logo">
+      <img src="logo.png" alt="Logo" />
       <li> ĐH Nguyễn Tất Thành </li>
     </div>
     <ul>
       <li class="active"> Profile </li>
       <li> Draw </li>
-      </ul>
+    </ul>
   </div>
 
   <div class="main">
-      <!-- Profile Section -->
+    <!-- Profile Section -->
     <div class="profile-card">
-      <img src="20240929_131322_140.jpg" alt="Avatar Nguyễn Tú Quyên">
+      <img src="20240929_131322_140.jpg" alt="Avatar Nguyễn Tú Quyên" />
       <h1>Nguyễn Tú Quyên</h1>
       <p>Developer & Designer</p>
       <div class="stats">
@@ -319,7 +364,7 @@
     <!-- Posts Section -->
     <div class="posts">
       <div class="post-card">
-        <img src="OIP (2).jpg" alt="Piano">
+        <img src="OIP (2).jpg" alt="Piano" />
         <div class="post-content">
           <div class="tag">Piano</div>
           <h4>Piano là một loại nhạc cụ phím</h4>
@@ -328,7 +373,7 @@
       </div>
 
       <div class="post-card">
-        <img src="OIP (3).jpg" alt="Organ">
+        <img src="OIP (3).jpg" alt="Organ" />
         <div class="post-content">
           <div class="tag">Church Organ</div>
           <h4>Đàn nhà thờ (organ)</h4>
@@ -337,7 +382,7 @@
       </div>
 
       <div class="post-card">
-        <img src="OIP-_4_.jpg" alt="Church">
+        <img src="OIP-_4_.jpg" alt="Church" />
         <div class="post-content">
           <div class="tag">Church</div>
           <h4>Nhà thờ</h4>
@@ -346,78 +391,135 @@
       </div>
     </div>
 
-    <!-- Drawing App -->
-    <div class="drawing-container">
-      <div class="drawing-header">
-        <div class="colors">
-          <div class="color-btn selected" style="background-color: black;" data-color="#000000"></div>
-          <div class="color-btn" style="background-color: red;" data-color="#ff0000"></div>
-          <div class="color-btn" style="background-color: blue;" data-color="#0000ff"></div>
-          <div class="color-btn" style="background-color: green;" data-color="#00ff00"></div>
-          <div class="color-btn" style="background-color: orange;" data-color="#ffa500"></div>
-          <div class="color-btn" style="background-color: purple;" data-color="#800080"></div>
-        </div>
-        <button class="btn-clear">Clear</button>
-      </div>
-      <canvas id="drawingCanvas"></canvas>
-    </div>
+    <!-- Draw Section -->
+    <div class="draw-section">
+      <div class="draw-controls">
+        <div>Shapes</div>
+        <label><input type="checkbox" name="shape" value="rectangle" /> Rectangle</label>
+        <label><input type="radio" name="shape" value="circle" /> Circle</label>
+        <label><input type="radio" name="shape" value="triangle" /> Triangle</label>
+        <label style="margin-top:10px;"><input type="checkbox" id="fillColor" /> Fill color</label>
 
+        <div style="margin-top: 20px;">Options</div>
+        <button id="brushBtn" style="color: #2196f3;">🖌️ Brush</button><br />
+        <button id="eraserBtn" style="color: #666; margin-top: 5px;">🩹 Eraser</button>
+
+        <input type="range" id="brushSize" min="1" max="30" value="5" />
+
+        <div>Colors</div>
+        <div style="margin: 10px 0;">
+          <div class="color-circle" data-color="#fff" style="background:#fff; border: 1px solid #ccc;"></div>
+          <div class="color-circle selected" data-color="#000" style="background:#000;"></div>
+          <div class="color-circle" data-color="#d32f2f" style="background:#d32f2f;"></div>
+          <div class="color-circle" data-color="#7bc02f" style="background:#7bc02f;"></div>
+          <div class="color-circle" data-color="#4a90e2" style="background:#4a90e2;"></div>
+        </div>
+
+        <button id="clearCanvas">Clear Canvas</button>
+        <button id="saveImage">Save As Image</button>
+      </div>
+
+      <canvas id="drawCanvas" width="600" height="400"></canvas>
+    </div>
   </div>
 
   <script>
-    const canvas = document.getElementById('drawingCanvas');
+    const canvas = document.getElementById('drawCanvas');
     const ctx = canvas.getContext('2d');
 
-    // Thiết lập kích thước canvas cho chuẩn responsive:
-    function resizeCanvas() {
-      // Đặt width và height theo kích thước CSS
-      canvas.width = canvas.clientWidth;
-      canvas.height = canvas.clientHeight;
-    }
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-
-    // Biến trạng thái vẽ
     let drawing = false;
-    let currentColor = '#000000';
+    let brushColor = '#000';
+    let brushSize = 5;
+    let tool = 'brush'; // brush or eraser
 
-    canvas.addEventListener('mousedown', (e) => {
+    const brushBtn = document.getElementById('brushBtn');
+    const eraserBtn = document.getElementById('eraserBtn');
+    const brushSizeInput = document.getElementById('brushSize');
+    const clearCanvasBtn = document.getElementById('clearCanvas');
+    const saveImageBtn = document.getElementById('saveImage');
+    const colorCircles = document.querySelectorAll('.color-circle');
+
+    function getMousePos(canvas, evt) {
+      var rect = canvas.getBoundingClientRect();
+      return {
+        x: evt.clientX - rect.left,
+        y: evt.clientY - rect.top
+      };
+    }
+
+    function startPosition(e) {
       drawing = true;
+      draw(e);
+    }
+
+    function finishedPosition() {
+      drawing = false;
       ctx.beginPath();
-      ctx.moveTo(e.offsetX, e.offsetY);
-    });
+    }
 
-    canvas.addEventListener('mousemove', (e) => {
+    function draw(e) {
       if (!drawing) return;
-      ctx.lineTo(e.offsetX, e.offsetY);
-      ctx.strokeStyle = currentColor;
-      ctx.lineWidth = 3;
+
+      const pos = getMousePos(canvas, e);
+
+      ctx.lineWidth = brushSize;
       ctx.lineCap = 'round';
+
+      if(tool === 'eraser'){
+        ctx.strokeStyle = '#fff';
+      } else {
+        ctx.strokeStyle = brushColor;
+      }
+
+      ctx.lineTo(pos.x, pos.y);
       ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(pos.x, pos.y);
+    }
+
+    canvas.addEventListener('mousedown', startPosition);
+    canvas.addEventListener('mouseup', finishedPosition);
+    canvas.addEventListener('mouseout', finishedPosition);
+    canvas.addEventListener('mousemove', draw);
+
+    brushBtn.onclick = () => {
+      tool = 'brush';
+      brushBtn.style.color = '#2196f3';
+      eraserBtn.style.color = '#666';
+    };
+
+    eraserBtn.onclick = () => {
+      tool = 'eraser';
+      eraserBtn.style.color = '#2196f3';
+      brushBtn.style.color = '#666';
+    };
+
+    brushSizeInput.oninput = (e) => {
+      brushSize = e.target.value;
+    };
+
+    colorCircles.forEach(c => {
+      c.onclick = () => {
+        colorCircles.forEach(c2 => c2.classList.remove('selected'));
+        c.classList.add('selected');
+        brushColor = c.dataset.color;
+        tool = 'brush';
+        brushBtn.style.color = '#2196f3';
+        eraserBtn.style.color = '#666';
+      };
     });
 
-    canvas.addEventListener('mouseup', () => {
-      drawing = false;
-    });
-
-    canvas.addEventListener('mouseleave', () => {
-      drawing = false;
-    });
-
-    // Chọn màu vẽ
-    const colorButtons = document.querySelectorAll('.color-btn');
-    colorButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        colorButtons.forEach(b => b.classList.remove('selected'));
-        btn.classList.add('selected');
-        currentColor = btn.getAttribute('data-color');
-      });
-    });
-
-    // Xóa canvas
-    document.querySelector('.btn-clear').addEventListener('click', () => {
+    clearCanvasBtn.onclick = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-    });
+    };
+
+    saveImageBtn.onclick = () => {
+      const dataURL = canvas.toDataURL('image/png');
+      const link = document.createElement('a');
+      link.download = 'my-drawing.png';
+      link.href = dataURL;
+      link.click();
+    };
   </script>
 </body>
 </html>
