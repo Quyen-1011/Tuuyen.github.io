@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard without Dashboard Page</title>
+  <title>Dashboard with Piano Sound</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body {
@@ -56,11 +56,8 @@
     .wrapper { background: #222; color: #ccc; padding: 20px; border-radius: 25px; text-align: center; }
     .wrapper header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
     .wrapper header h2 { color: white; margin: 0; }
-    .volume-slider input { vertical-align: middle; }
-    .keys-toggle { display: inline-flex; align-items: center; margin-left: 10px; }
-    .keys-toggle input { margin-left: 5px; }
     .piano-keys { display: flex; justify-content: center; margin-top: 10px; }
-    .key { border: 1px solid black; height: 200px; width: 40px; background: white; margin: 0 2px; border-radius: 5px; box-sizing: border-box; position: relative; }
+    .key { border: 1px solid black; height: 200px; width: 40px; background: white; margin: 0 2px; border-radius: 5px; box-sizing: border-box; position: relative; cursor: pointer; }
     .key.black { background: black; height: 120px; width: 30px; position: absolute; top: 0; z-index: 1; margin: 0; border-radius: 0 0 5px 5px; }
     .key-container { position: relative; }
   </style>
@@ -96,39 +93,33 @@
       <div class="wrapper">
         <header>
           <h2>Playable PIANO</h2>
-          <div class="volume-slider">
-            Volume <input type="range" min="0" max="100" value="50">
-          </div>
-          <div class="keys-toggle">
-            Show Keys <input type="checkbox">
-          </div>
         </header>
         <div class="piano-keys">
           <div class="key-container">
-            <div class="key white"></div>
-            <div class="key black" style="left: 25px;"></div>
+            <div class="key white" data-note="C"></div>
+            <div class="key black" data-note="C#"></div>
           </div>
           <div class="key-container">
-            <div class="key white"></div>
-            <div class="key black" style="left: 25px;"></div>
+            <div class="key white" data-note="D"></div>
+            <div class="key black" data-note="D#"></div>
           </div>
           <div class="key-container">
-            <div class="key white"></div>
+            <div class="key white" data-note="E"></div>
           </div>
           <div class="key-container">
-            <div class="key white"></div>
-            <div class="key black" style="left: 25px;"></div>
+            <div class="key white" data-note="F"></div>
+            <div class="key black" data-note="F#"></div>
           </div>
           <div class="key-container">
-            <div class="key white"></div>
-            <div class="key black" style="left: 25px;"></div>
+            <div class="key white" data-note="G"></div>
+            <div class="key black" data-note="G#"></div>
           </div>
           <div class="key-container">
-            <div class="key white"></div>
-            <div class="key black" style="left: 25px;"></div>
+            <div class="key white" data-note="A"></div>
+            <div class="key black" data-note="A#"></div>
           </div>
           <div class="key-container">
-            <div class="key white"></div>
+            <div class="key white" data-note="B"></div>
           </div>
         </div>
       </div>
@@ -150,11 +141,23 @@
       });
     });
 
-    // Piano keys click (placeholder)
+    // preload piano audio
+    const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+    const audioElements = {};
+    notes.forEach(note => {
+      audioElements[note] = new Audio(`sounds/${note}.mp3`);
+    });
+
+    // play sound when clicking keys
     const keys = document.querySelectorAll('.key.white, .key.black');
     keys.forEach(key => {
       key.addEventListener('click', () => {
-        alert('Play sound for this key');
+        const note = key.getAttribute('data-note');
+        const audio = audioElements[note];
+        if (audio) {
+          audio.currentTime = 0; // reset if playing
+          audio.play();
+        }
       });
     });
   </script>
