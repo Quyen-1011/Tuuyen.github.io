@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard with Draw & Profile</title>
+  <title>Dashboard with Draw, Profile, Game</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body {
@@ -47,83 +47,55 @@
       display: block;
     }
 
-    /* Profile page styles */
-    .profile-card {
-      background: #fff;
-      color: black;
-      border-radius: 20px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      padding: 20px;
-      margin-top: 30px;
-      text-align: center;
-      width: 300px;
-    }
-    .profile-card img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      border: 3px solid #ffb6b9;
-      object-fit: cover;
-    }
-    .profile-card h2 { margin: 10px 0 5px; }
-    .profile-card p { color: gray; margin: 0 0 15px; }
-    .stats {
+    /* Draw page styles */
+    .draw-container {
       display: flex;
-      justify-content: space-around;
-      margin-bottom: 15px;
+      background: #4fa3f7;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 80vh;
     }
-    .stats div { text-align: center; }
-    .buttons button, .buttons a {
-      border: none;
-      border-radius: 20px;
-      padding: 10px 20px;
-      margin: 0 5px;
-      cursor: pointer;
-      font-weight: bold;
-      text-decoration: none;
-      display: inline-block;
-    }
-    .buttons .message {
-      background: #ffb6b9;
-      color: white;
-    }
-    .buttons .follow {
-      background: #add8e6;
-      color: white;
-    }
-    .cards {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 30px;
-      gap: 20px;
-    }
-    .card {
+    .tools {
+      width: 200px;
       background: white;
       color: black;
-      border-radius: 15px;
-      overflow: hidden;
-      width: 250px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
-    .card img {
+    .canvas-container {
+      flex: 1;
+      background: white;
+    }
+    canvas {
+      display: block;
       width: 100%;
-      height: 150px;
-      object-fit: cover;
+      height: 100%;
     }
-    .card .label {
-      font-size: 12px;
-      color: white;
-      background: #ffb6b9;
-      display: inline-block;
-      padding: 3px 8px;
-      border-radius: 10px;
-      margin: 10px;
-    }
-    .card .description {
-      font-size: 14px;
-      margin: 0 10px 10px;
-    }
+
+    /* Profile page styles */
+    .profile-container { display: flex; flex-direction: column; align-items: center; background: linear-gradient(to bottom right, #ffe0c3, #ffb6b9); padding: 30px; border-radius: 10px; color: black; }
+    .profile-card { background: #fff; border-radius: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 20px; text-align: center; width: 300px; }
+    .profile-card img { width: 100px; height: 100px; border-radius: 50%; border: 3px solid #ffb6b9; object-fit: cover; }
+    .stats { display: flex; justify-content: space-around; margin-bottom: 15px; }
+    .buttons button, .buttons a { border: none; border-radius: 20px; padding: 10px 20px; margin: 0 5px; cursor: pointer; font-weight: bold; text-decoration: none; display: inline-block; }
+    .buttons .message { background: #ffb6b9; color: white; }
+    .buttons .follow { background: #add8e6; color: white; }
+    .cards { display: flex; justify-content: center; flex-wrap: wrap; margin-top: 30px; gap: 20px; max-width: 1000px; }
+    .card { background: white; border-radius: 15px; overflow: hidden; width: 250px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    .card img { width: 100%; height: 150px; object-fit: cover; }
+    .card .label { font-size: 12px; color: white; background: #ffb6b9; display: inline-block; padding: 3px 8px; border-radius: 10px; margin: 10px; }
+    .card .description { font-size: 14px; margin: 0 10px 10px; }
+
+    /* Game styles */
+    .game-grid { display: grid; grid-template-columns: repeat(4, 80px); gap: 10px; background: white; padding: 20px; border-radius: 20px; justify-content: center; }
+    .game-grid .card { width: 80px; height: 80px; background: #eee; display: flex; justify-content: center; align-items: center; font-size: 30px; border-radius: 10px; cursor: pointer; position: relative; perspective: 600px; }
+    .card-inner { width: 100%; height: 100%; position: absolute; transform-style: preserve-3d; transition: transform 0.5s; }
+    .card.flipped .card-inner { transform: rotateY(180deg); }
+    .card-front, .card-back { backface-visibility: hidden; position: absolute; width: 100%; height: 100%; border-radius: 10px; display: flex; justify-content: center; align-items: center; }
+    .card-front { background: white; transform: rotateY(180deg); font-size: 30px; color: #6c63ff; }
+    .card-back { background: #6c63ff; color: white; font-size: 40px; }
   </style>
 </head>
 <body>
@@ -131,74 +103,161 @@
   <div class="sidebar">
     <h2>Dashboard</h2>
     <a href="#" class="menu-item active" data-page="overview"><i class="fa-solid fa-table-cells-large"></i> Dashboard</a>
-    <a href="#" class="menu-item" data-page="profile"><i class="fa-solid fa-user"></i> Profile</a>
     <a href="#" class="menu-item" data-page="draw"><i class="fa-solid fa-paint-brush"></i> Draw</a>
+    <a href="#" class="menu-item" data-page="profile"><i class="fa-solid fa-user"></i> Profile</a>
+    <a href="#" class="menu-item" data-page="game"><i class="fa-solid fa-gamepad"></i> Game</a>
   </div>
 
   <div class="main">
-    <div id="overview" class="page active">
-      <h1>Dashboard Overview</h1>
-      <p>Welcome to your dashboard! Use the menu to navigate.</p>
-    </div>
-
+   <div id="overview" class="page active">
+  <h1>Dashboard Overview</h1>
+  <p>Welcome to your dashboard! Use the menu to navigate.</p>
+  <div class="dashboard-image">
+    <img src="your_dashboard_image.jpg" alt="Dashboard Image">
+  </div>
+   </div>
     <div id="draw" class="page">
       <h1>Draw Page</h1>
-      <!-- You can integrate your draw app here -->
-      <p>Draw canvas placeholder...</p>
+      <div class="draw-container">
+        <div class="tools">
+          <h3>Shapes</h3>
+          <label><input type="checkbox"> Rectangle</label>
+          <label><input type="checkbox"> Circle</label>
+          <label><input type="checkbox"> Triangle</label>
+          <label><input type="checkbox"> Fill color</label>
+          <h3>Options</h3>
+          <label><input type="radio" name="tool" checked> Brush</label>
+          <label><input type="radio" name="tool"> Eraser</label>
+          <input type="range" min="1" max="20" value="5">
+          <h3>Colors</h3>
+          <label><input type="radio" name="color" checked> Black</label>
+          <label><input type="radio" name="color"> Red</label>
+          <label><input type="radio" name="color"> Green</label>
+          <label><input type="radio" name="color"> Blue</label>
+          <button>Clear Canvas</button>
+          <button>Save As Image</button>
+        </div>
+        <div class="canvas-container">
+          <canvas></canvas>
+        </div>
+      </div>
     </div>
 
     <div id="profile" class="page">
       <h1>Profile Page</h1>
-      <div class="profile-card">
-        <img src="20240929_131322_140.jpg" alt="Avatar">
-        <h2>Nguyễn Tú Quyên</h2>
-        <p>Developer & Designer</p>
-        <div class="stats">
-          <div><strong>0</strong><br>Following</div>
-          <div><strong>1,5k</strong><br>Followers</div>
-          <div><strong>200</strong><br>Posts</div>
-        </div>
-        <div class="buttons">
-          <button class="message">Message</button>
-          <a href="https://www.facebook.com/nquyen05.20" target="_blank" class="follow">Follow Me</a>
-        </div>
-      </div>
-
-      <div class="cards">
-        <div class="card">
-          <img src="OIP (2).jpg" alt="Piano">
-          <div class="label">Piano</div>
-          <div class="description">Piano là một loại nhạc cụ phím (keyboard instrument)</div>
+      <div class="profile-container">
+        <div class="profile-card">
+          <img src="20240929_131322_140.jpg" alt="Avatar">
+          <h2>Nguyễn Tú Quyên</h2>
+          <p>Developer & Designer</p>
+          <div class="stats">
+            <div><strong>0</strong><br>Following</div>
+            <div><strong>1,5k</strong><br>Followers</div>
+            <div><strong>200</strong><br>Posts</div>
+          </div>
+          <div class="buttons">
+            <button class="message">Message</button>
+            <a href="https://www.facebook.com/nquyen05.20" target="_blank" class="follow">Follow Me</a>
+          </div>
         </div>
 
-        <div class="card">
-          <img src="OIP (3).jpg" alt="Organ">
-          <div class="label">Church Organ</div>
-          <div class="description">Đàn nhà thờ thường gọi là đàn organ nhà thờ (Church Organ)</div>
-        </div>
-
-        <div class="card">
-          <img src="OIP-_4_.jpg" alt="Church">
-          <div class="label">Church</div>
-          <div class="description">Nhà thờ (Church) là nơi thờ phượng Thiên Chúa, nơi cộng đoàn Kitô hữu tụ họp</div>
+        <div class="cards">
+          <div class="card">
+            <img src="OIP (2).jpg" alt="Piano">
+            <div class="label">Piano</div>
+            <div class="description">Piano là một loại nhạc cụ phím (keyboard instrument)</div>
+          </div>
+          <div class="card">
+            <img src="OIP (3).jpg" alt="Organ">
+            <div class="label">Church Organ</div>
+            <div class="description">Đàn nhà thờ thường gọi là đàn organ nhà thờ (Church Organ)</div>
+          </div>
+          <div class="card">
+            <img src="OIP-_4_.jpg" alt="Church">
+            <div class="label">Church</div>
+            <div class="description">Nhà thờ (Church) là nơi thờ phượng Thiên Chúa, nơi cộng đoàn Kitô hữu tụ họp</div>
+          </div>
         </div>
       </div>
     </div>
+
+    <div id="game" class="page">
+      <h1>Memory Card Game</h1>
+      <div class="game-grid" id="game-grid"></div>
+    </div>
+
   </div>
 
   <script>
+    // Menu switching
     const menuItems = document.querySelectorAll('.menu-item');
     menuItems.forEach(item => {
       item.addEventListener('click', (e) => {
         e.preventDefault();
         menuItems.forEach(i => i.classList.remove('active'));
         item.classList.add('active');
-
         const page = item.getAttribute('data-page');
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         document.getElementById(page).classList.add('active');
       });
     });
+
+    // Game logic
+    const emojis = ['🍎','🍌','🍇','🍓','🍑','🍍','🥝','🍉'];
+    let items = [...emojis, ...emojis];
+    items.sort(() => 0.5 - Math.random());
+    const grid = document.getElementById('game-grid');
+
+    items.forEach((emoji, index) => {
+      const card = document.createElement('div');
+      card.classList.add('card');
+      card.innerHTML = `
+        <div class="card-inner">
+          <div class="card-front">${emoji}</div>
+          <div class="card-back">?</div>
+        </div>
+      `;
+      card.dataset.emoji = emoji;
+      grid.appendChild(card);
+    });
+
+    let firstCard = null;
+    let lockBoard = false;
+    let matchedCount = 0;
+
+    grid.addEventListener('click', function(e) {
+      const clicked = e.target.closest('.card');
+      if (!clicked || lockBoard || clicked.classList.contains('matched') || clicked === firstCard) return;
+
+      clicked.classList.add('flipped');
+
+      if (!firstCard) {
+        firstCard = clicked;
+      } else {
+        const secondCard = clicked;
+        if (firstCard.dataset.emoji === secondCard.dataset.emoji) {
+          firstCard.classList.add('matched');
+          secondCard.classList.add('matched');
+          firstCard = null;
+          matchedCount += 2;
+          if (matchedCount === items.length) {
+            setTimeout(() => {
+              alert("🎉 Bạn đã thắng!");
+              location.reload();
+            }, 500);
+          }
+        } else {
+          lockBoard = true;
+          setTimeout(() => {
+            firstCard.classList.remove('flipped');
+            secondCard.classList.remove('flipped');
+            firstCard = null;
+            lockBoard = false;
+          }, 1000);
+        }
+      }
+    });
   </script>
+
 </body>
 </html>
