@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Drawing App</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #4da6ff;
+      display: flex;
+      height: 100vh;
+    }
+    .sidebar {
+      background: white;
+      width: 250px;
+      padding: 20px;
+      box-sizing: border-box;
+      border-radius: 10px;
+      margin: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .sidebar h3 {
+      margin: 10px 0 5px;
+    }
+    .option {
+      margin: 5px 0;
+    }
+    .colors {
+      display: flex;
+      gap: 10px;
+    }
+    .colors input[type="radio"] {
+      accent-color: black;
+    }
+    canvas {
+      flex: 1;
+      background: white;
+      border-radius: 10px;
+      margin: 10px;
+      cursor: crosshair;
+    }
+    button {
+      padding: 10px;
+      border: none;
+      background: #4da6ff;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h3>Shapes</h3>
+    <div class="option"><input type="radio" name="shape" value="rectangle"> Rectangle</div>
+    <div class="option"><input type="radio" name="shape" value="circle"> Circle</div>
+    <div class="option"><input type="radio" name="shape" value="triangle"> Triangle</div>
+    <div class="option"><input type="checkbox" id="fill"> Fill color</div>
+
+    <h3>Options</h3>
+    <div class="option"><input type="radio" name="tool" value="brush" checked> Brush</div>
+    <div class="option"><input type="radio" name="tool" value="eraser"> Eraser</div>
+    <input type="range" id="size" min="1" max="30" value="5">
+
+    <h3>Colors</h3>
+    <div class="colors">
+      <input type="radio" name="color" value="black" checked>
+      <input type="radio" name="color" value="red">
+      <input type="radio" name="color" value="green">
+      <input type="radio" name="color" value="blue">
+    </div>
+
+    <button id="clear">Clear Canvas</button>
+    <button id="save">Save As Image</button>
+  </div>
+  <canvas id="canvas"></canvas>
+
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth - 300;
+    canvas.height = window.innerHeight - 20;
+
+    let drawing = false;
+    let startX, startY;
+
+    function getCurrentColor() {
+      const colors = document.getElementsByName('color');
+      for (let c of colors) {
+        if (c.checked) return c.value;
+      }
+      return 'black';
+    }
+
+    function getTool() {
+      const tools = document.getElementsByName('tool');
+      for (let t of tools) {
+        if (t.checked) return t.value;
+      }
+      return 'brush';
+    }
+
+    function getShape() {
+      const shapes = document.getElementsByName('shape');
+      for (let s of shapes) {
+        if (s.checked) return s.value;
+      }
+      return null;
+    }
+
+    canvas.addEventListener('mousedown', (e) => {
+      drawing = true;
+      startX = e.offsetX;
+      startY = e.offsetY;
+      if(getTool() === 'brush'){
+        ctx.beginPath();
+        ctx.moveTo(startX, startY);
+      }
+    });
+
+    canvas.addEventListener('mouseup', (e) => {
+      if (!drawing) return;
+      drawing = false;
+      const endX = e.offsetX;
+      const endY = e.offsetY;
+      const shape = getShape();
+      const fill = document.getElementById('fill').checked;
+      ctx.strokeStyle = getTool() === 'eraser' ? 'white' : getCurrentColor();
+      ctx.fillStyle = getCurrentColor();
+      ctx.lineWidth = document.getElementById('size').value;
+
+      if(shape){
+        if(shape === 'rectangle'){
+          const w = endX - startX;
+          const h = endY - startY;
+          if(fill) ctx.fillRect(startX, startY, w, h);
+          else ctx.strokeRect(startX, startY, w, h);
+        }
+        else if(shape === 'circle'){
+          const radius = Math.sqrt(Math.pow(endX-startX,2) + Math.pow(endY-startY,2));
+          ctx.beginPath();
+          ctx.arc(startX, startY, radius, 0, Math.PI*2);
+          if(fill) ctx.fill();
+          else ctx.stroke();
+        }
+        else if(shape === 'triangle'){
+          ctx.beginPath();
+          ctx.moveTo(startX, startY);
+          ctx.lineTo(endX, endY);
+          ctx.lineTo(startX*2 - endX, endY);
+          ctx.closePath();
+          if(fill) ctx.fill();
+          else ctx.stroke();
+        }
+      }
+    });
+
+    canvas.addEventListener('mousemove', (e) => {
+      if(!drawing) return;
+      if(getTool() === 'brush' || getTool() === 'eraser'){
+        ctx.strokeStyle = getTool() === 'eraser' ? 'white' : getCurrentColor();
+        ctx.lineWidth = document.getElementById('size').value;
+        ctx.lineTo(e.offsetX, e.offsetY);
+        ctx.stroke();
+      }
+    });
+
+    document.getElementById('clear').addEventListener('click', () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    });
+
+    document.getElementById('save').addEventListener('click', () => {
+      const link = document.createElement('a');
+      link.download = 'canvas.png';
+      link.href = canvas.toDataURL();
+      link.click();
+    });
+  </script>
+</body>
+</html>
