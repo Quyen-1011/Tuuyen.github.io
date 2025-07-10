@@ -3,39 +3,48 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dashboard - Nguyễn Tú Quyên</title>
+  <title>Dashboard Overview</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
+    :root {
+      --primary: #8b5cf6;
+      --bg-dark: #111827;
+      --bg-deep: #0f172a;
+      --text-light: #f3f4f6;
+      --text-muted: #9ca3af;
+    }
+
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       display: flex;
-      min-height: 100vh;
-      background-color: #1f2937;
-      color: white;
+      height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg-deep);
+      color: var(--text-light);
     }
 
+    /* Sidebar */
     .sidebar {
-      width: 220px;
-      background-color: #111827;
-      color: white;
+      width: 230px;
+      background-color: var(--bg-dark);
+      padding: 20px 10px;
       display: flex;
       flex-direction: column;
-      padding: 20px;
+      justify-content: space-between;
     }
 
     .sidebar .logo {
-      margin-bottom: 30px;
       text-align: center;
+      margin-bottom: 30px;
     }
 
     .sidebar .logo img {
-      width: 60px;
-      height: auto;
+      width: 80px;
       border-radius: 50%;
     }
 
@@ -45,481 +54,90 @@
     }
 
     .sidebar ul li {
-      padding: 12px 10px;
-      cursor: pointer;
-      border-radius: 6px;
-      margin-bottom: 10px;
+      padding: 12px 16px;
+      margin: 6px 0;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
+      border-radius: 8px;
+      color: var(--text-light);
+      cursor: pointer;
+      transition: background 0.2s;
     }
 
-    .sidebar ul li.active,
-    .sidebar ul li:hover {
-      background-color: #7c3aed;
+    .sidebar ul li:hover,
+    .sidebar ul li.active {
+      background-color: var(--primary);
     }
 
-    .main {
-      flex: 1;
-      padding: 30px;
-      background: linear-gradient(to right, #fbc2eb, #a6c1ee);
-      color: #111;
-      overflow-y: auto;
+    .sidebar ul li i {
+      min-width: 20px;
+    }
+
+    .dark-mode-toggle {
+      padding: 10px;
       display: flex;
-      flex-direction: column;
-      gap: 30px;
+      align-items: center;
+      justify-content: space-between;
+      background: #1e293b;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+
+    .dark-mode-toggle input {
+      accent-color: var(--primary);
+      transform: scale(1.2);
+    }
+
+    /* Main content */
+    .main {
+      flex-grow: 1;
+      padding: 30px;
+      background-color: var(--bg-deep);
     }
 
     .main h1 {
-      font-size: 28px;
+      font-size: 26px;
+      font-weight: bold;
       margin-bottom: 15px;
     }
 
-    .subtitle {
-      background-color: #ffffff66;
-      padding: 12px 16px;
-      border-radius: 6px;
+    .welcome-box {
+      background-color: #1e293b;
+      padding: 16px;
+      border-radius: 10px;
       font-size: 15px;
-      margin-bottom: 30px;
-    }
-
-    .profile-card {
-      background: white;
-      border-radius: 20px;
-      padding: 20px;
-      width: 300px;
-      text-align: center;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      color: #111;
-    }
-
-    .profile-card img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      border: 3px solid #f06292;
-      object-fit: cover;
-      margin-bottom: 10px;
-    }
-
-    .profile-card h1 {
-      margin: 10px 0 5px;
-      font-size: 22px;
-    }
-
-    .profile-card p {
-      color: gray;
-      margin: 5px 0 15px;
-    }
-
-    .stats {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 15px;
-    }
-
-    .stats div {
-      text-align: center;
-    }
-
-    .stats div span {
-      display: block;
-      font-weight: bold;
-    }
-
-    .btns {
-      display: flex;
-      justify-content: space-around;
-      margin-bottom: 20px;
-    }
-
-    .btns button {
-      border: none;
-      padding: 10px 20px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .btn-message {
-      background: #f06292;
-      color: white;
-    }
-
-    .btn-follow {
-      background: #81d4fa;
-      color: white;
-    }
-
-    .posts {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-start;
-      gap: 20px;
-      color: #111;
-    }
-
-    .post-card {
-      width: 250px;
-      background: white;
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-      color: #111;
-    }
-
-    .post-card img {
-      width: 100%;
-      height: 150px;
-      object-fit: cover;
-    }
-
-    .post-content {
-      padding: 10px;
-    }
-
-    .post-content h4 {
-      margin: 5px 0;
-      font-size: 16px;
-    }
-
-    .post-content p {
-      font-size: 14px;
-      color: #555;
-    }
-
-    .tag {
-      background: #eee;
-      display: inline-block;
-      padding: 3px 8px;
-      border-radius: 10px;
-      font-size: 12px;
-      margin-bottom: 5px;
-      color: #555;
-    }
-
-    /* DRAW SECTION */
-    .draw-section {
-      background: white;
-      border-radius: 15px;
-      padding: 20px;
-      color: #111;
-      display: flex;
-      gap: 20px;
-      max-width: 900px;
-      flex-wrap: wrap;
-    }
-
-    .draw-controls {
-      width: 180px;
-      font-family: Arial, sans-serif;
-      user-select: none;
-    }
-
-    .draw-controls div {
-      margin-bottom: 8px;
-      font-weight: bold;
-    }
-
-    .draw-controls label {
-      display: block;
-      margin-bottom: 6px;
-      cursor: pointer;
-      font-weight: normal;
-      color: #222;
-    }
-
-    .draw-controls input[type="checkbox"],
-    .draw-controls input[type="radio"] {
-      margin-right: 6px;
-      cursor: pointer;
-    }
-
-    .draw-controls button {
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 0;
-      font-size: 14px;
-    }
-
-    .draw-controls button:hover {
-      text-decoration: underline;
-    }
-
-    .color-circle {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      cursor: pointer;
-      border: 1px solid #ccc;
-      display: inline-block;
-    }
-
-    .color-circle.selected {
-      border: 2px solid #444;
-    }
-
-    #brushSize {
-      width: 100%;
-      margin-bottom: 15px;
-    }
-
-    #clearCanvas, #saveImage {
-      width: 100%;
-      padding: 8px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      background: none;
-      font-weight: bold;
-      margin-bottom: 10px;
-      user-select: none;
-    }
-
-    #saveImage {
-      background: #4a90e2;
-      color: white;
-      border: none;
-    }
-
-    #drawCanvas {
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      background: white;
-      cursor: crosshair;
-      flex-grow: 1;
-      max-width: 600px;
-      max-height: 400px;
-      width: 100%;
-      height: 400px;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      body {
-        flex-direction: column;
-      }
-      .sidebar {
-        width: 100%;
-        flex-direction: row;
-        overflow-x: auto;
-      }
-      .main {
-        padding: 20px;
-      }
-      .posts {
-        justify-content: center;
-      }
-      .draw-section {
-        max-width: 100%;
-        flex-direction: column;
-      }
-      .draw-controls {
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-      }
-      #drawCanvas {
-        max-width: 100%;
-        height: 300px;
-      }
+      color: var(--text-muted);
     }
   </style>
 </head>
 <body>
 
+  <!-- Sidebar -->
   <div class="sidebar">
-    <div class="logo">
-      <img src="logo.png" alt="Logo" />
-      <li> ĐH Nguyễn Tất Thành </li>
+    <div>
+      <div class="logo">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Logo_Đại_học_Nguyễn_Tất_Thành.svg/800px-Logo_Đại_học_Nguyễn_Tất_Thành.svg.png" alt="Logo NTTU" />
+      </div>
+      <ul>
+        <li class="active"><i class="fa-solid fa-table-cells-large"></i> Dashboard</li>
+        <li><i class="fa-solid fa-user"></i> Profile</li>
+      </ul>
     </div>
-    <ul>
-      <li class="active"> Profile </li>
-      <li> Draw </li>
-    </ul>
+
+    <div class="dark-mode-toggle">
+      <span><i class="fa-solid fa-gear"></i> Dark Mode</span>
+      <input type="checkbox" checked disabled />
+    </div>
   </div>
 
+  <!-- Main Content -->
   <div class="main">
-    <!-- Profile Section -->
-    <div class="profile-card">
-      <img src="20240929_131322_140.jpg" alt="Avatar Nguyễn Tú Quyên" />
-      <h1>Nguyễn Tú Quyên</h1>
-      <p>Developer & Designer</p>
-      <div class="stats">
-        <div><span>0</span>Following</div>
-        <div><span>1.5k</span>Followers</div>
-        <div><span>200</span>Posts</div>
-      </div>
-      <div class="btns">
-        <a href="https://www.facebook.com/nquyen05.20" target="_blank" style="text-decoration: none;">
-          <button class="btn-message">Message</button>
-        </a>
-        <a href="https://www.facebook.com/nquyen05.20" target="_blank" style="text-decoration: none;">
-          <button class="btn-follow">Follow Me</button>
-        </a>
-      </div>
-    </div>
-
-    <!-- Posts Section -->
-    <div class="posts">
-      <div class="post-card">
-        <img src="OIP (2).jpg" alt="Piano" />
-        <div class="post-content">
-          <div class="tag">Piano</div>
-          <h4>Piano là một loại nhạc cụ phím</h4>
-          <p>Piano là một loại nhạc cụ phím (keyboard instrument)...</p>
-        </div>
-      </div>
-
-      <div class="post-card">
-        <img src="OIP (3).jpg" alt="Organ" />
-        <div class="post-content">
-          <div class="tag">Church Organ</div>
-          <h4>Đàn nhà thờ (organ)</h4>
-          <p>Đàn nhà thờ thường gọi là đàn organ nhà thờ (Church Organ)...</p>
-        </div>
-      </div>
-
-      <div class="post-card">
-        <img src="OIP-_4_.jpg" alt="Church" />
-        <div class="post-content">
-          <div class="tag">Church</div>
-          <h4>Nhà thờ</h4>
-          <p>Nhà thờ (Church) là nơi thờ phượng Thiên Chúa...</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Draw Section -->
-    <div class="draw-section">
-      <div class="draw-controls">
-        <div>Shapes</div>
-        <label><input type="checkbox" name="shape" value="rectangle" /> Rectangle</label>
-        <label><input type="radio" name="shape" value="circle" /> Circle</label>
-        <label><input type="radio" name="shape" value="triangle" /> Triangle</label>
-        <label style="margin-top:10px;"><input type="checkbox" id="fillColor" /> Fill color</label>
-
-        <div style="margin-top: 20px;">Options</div>
-        <button id="brushBtn" style="color: #2196f3;">🖌️ Brush</button><br />
-        <button id="eraserBtn" style="color: #666; margin-top: 5px;">🩹 Eraser</button>
-
-        <input type="range" id="brushSize" min="1" max="30" value="5" />
-
-        <div>Colors</div>
-        <div style="margin: 10px 0;">
-          <div class="color-circle" data-color="#fff" style="background:#fff; border: 1px solid #ccc;"></div>
-          <div class="color-circle selected" data-color="#000" style="background:#000;"></div>
-          <div class="color-circle" data-color="#d32f2f" style="background:#d32f2f;"></div>
-          <div class="color-circle" data-color="#7bc02f" style="background:#7bc02f;"></div>
-          <div class="color-circle" data-color="#4a90e2" style="background:#4a90e2;"></div>
-        </div>
-
-        <button id="clearCanvas">Clear Canvas</button>
-        <button id="saveImage">Save As Image</button>
-      </div>
-
-      <canvas id="drawCanvas" width="600" height="400"></canvas>
+    <h1>Dashboard Overview</h1>
+    <div class="welcome-box">
+      Welcome to your dashboard! Use the menu to navigate, toggle the sidebar, or switch between light and dark themes to personalize your experience.
     </div>
   </div>
 
-  <script>
-    const canvas = document.getElementById('drawCanvas');
-    const ctx = canvas.getContext('2d');
-
-    let drawing = false;
-    let brushColor = '#000';
-    let brushSize = 5;
-    let tool = 'brush'; // brush or eraser
-
-    const brushBtn = document.getElementById('brushBtn');
-    const eraserBtn = document.getElementById('eraserBtn');
-    const brushSizeInput = document.getElementById('brushSize');
-    const clearCanvasBtn = document.getElementById('clearCanvas');
-    const saveImageBtn = document.getElementById('saveImage');
-    const colorCircles = document.querySelectorAll('.color-circle');
-
-    function getMousePos(canvas, evt) {
-      var rect = canvas.getBoundingClientRect();
-      return {
-        x: evt.clientX - rect.left,
-        y: evt.clientY - rect.top
-      };
-    }
-
-    function startPosition(e) {
-      drawing = true;
-      draw(e);
-    }
-
-    function finishedPosition() {
-      drawing = false;
-      ctx.beginPath();
-    }
-
-    function draw(e) {
-      if (!drawing) return;
-
-      const pos = getMousePos(canvas, e);
-
-      ctx.lineWidth = brushSize;
-      ctx.lineCap = 'round';
-
-      if(tool === 'eraser'){
-        ctx.strokeStyle = '#fff';
-      } else {
-        ctx.strokeStyle = brushColor;
-      }
-
-      ctx.lineTo(pos.x, pos.y);
-      ctx.stroke();
-      ctx.beginPath();
-      ctx.moveTo(pos.x, pos.y);
-    }
-
-    canvas.addEventListener('mousedown', startPosition);
-    canvas.addEventListener('mouseup', finishedPosition);
-    canvas.addEventListener('mouseout', finishedPosition);
-    canvas.addEventListener('mousemove', draw);
-
-    brushBtn.onclick = () => {
-      tool = 'brush';
-      brushBtn.style.color = '#2196f3';
-      eraserBtn.style.color = '#666';
-    };
-
-    eraserBtn.onclick = () => {
-      tool = 'eraser';
-      eraserBtn.style.color = '#2196f3';
-      brushBtn.style.color = '#666';
-    };
-
-    brushSizeInput.oninput = (e) => {
-      brushSize = e.target.value;
-    };
-
-    colorCircles.forEach(c => {
-      c.onclick = () => {
-        colorCircles.forEach(c2 => c2.classList.remove('selected'));
-        c.classList.add('selected');
-        brushColor = c.dataset.color;
-        tool = 'brush';
-        brushBtn.style.color = '#2196f3';
-        eraserBtn.style.color = '#666';
-      };
-    });
-
-    clearCanvasBtn.onclick = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-    };
-
-    saveImageBtn.onclick = () => {
-      const dataURL = canvas.toDataURL('image/png');
-      const link = document.createElement('a');
-      link.download = 'my-drawing.png';
-      link.href = dataURL;
-      link.click();
-    };
-  </script>
 </body>
 </html>
