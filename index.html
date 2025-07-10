@@ -3,27 +3,93 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nguyễn Tú Quyên - Profile</title>
+  <title>Dashboard - Nguyễn Tú Quyên</title>
   <style>
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      background: linear-gradient(to right, #fbc2eb, #a6c1ee);
+    }
+
+    body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       display: flex;
-      flex-direction: column;
-      align-items: center;
       min-height: 100vh;
+      background-color: #1f2937;
+      color: white;
     }
+
+    .sidebar {
+      width: 220px;
+      background-color: #111827;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+    }
+
+    .sidebar .logo {
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .sidebar .logo img {
+      width: 60px;
+      height: auto;
+      border-radius: 50%;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar ul li {
+      padding: 12px 10px;
+      cursor: pointer;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sidebar ul li.active,
+    .sidebar ul li:hover {
+      background-color: #7c3aed;
+    }
+
+    .main {
+      flex: 1;
+      padding: 30px;
+      background: linear-gradient(to right, #fbc2eb, #a6c1ee);
+      color: #111;
+      overflow-y: auto;
+    }
+
+    .main h1 {
+      font-size: 28px;
+      margin-bottom: 15px;
+    }
+
+    .subtitle {
+      background-color: #ffffff66;
+      padding: 12px 16px;
+      border-radius: 6px;
+      font-size: 15px;
+      margin-bottom: 30px;
+    }
+
     .profile-card {
       background: white;
       border-radius: 20px;
       padding: 20px;
       width: 300px;
       text-align: center;
-      margin-top: 30px;
+      margin-bottom: 30px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
+
     .profile-card img {
       width: 100px;
       height: 100px;
@@ -32,31 +98,38 @@
       object-fit: cover;
       margin-bottom: 10px;
     }
+
     .profile-card h1 {
       margin: 10px 0 5px;
       font-size: 22px;
     }
+
     .profile-card p {
       color: gray;
       margin: 5px 0 15px;
     }
+
     .stats {
       display: flex;
       justify-content: space-between;
       margin-bottom: 15px;
     }
+
     .stats div {
       text-align: center;
     }
+
     .stats div span {
       display: block;
       font-weight: bold;
     }
+
     .btns {
       display: flex;
       justify-content: space-around;
       margin-bottom: 20px;
     }
+
     .btns button {
       border: none;
       padding: 10px 20px;
@@ -64,23 +137,24 @@
       cursor: pointer;
       font-weight: bold;
     }
+
     .btn-message {
       background: #f06292;
       color: white;
     }
+
     .btn-follow {
       background: #81d4fa;
       color: white;
     }
 
-    /* Posts section */
     .posts {
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
+      justify-content: flex-start;
       gap: 20px;
-      margin: 40px 20px;
     }
+
     .post-card {
       width: 250px;
       background: white;
@@ -88,22 +162,27 @@
       overflow: hidden;
       box-shadow: 0 3px 10px rgba(0,0,0,0.1);
     }
+
     .post-card img {
       width: 100%;
       height: 150px;
       object-fit: cover;
     }
+
     .post-content {
       padding: 10px;
     }
+
     .post-content h4 {
       margin: 5px 0;
       font-size: 16px;
     }
+
     .post-content p {
       font-size: 14px;
       color: #555;
     }
+
     .tag {
       background: #eee;
       display: inline-block;
@@ -115,55 +194,88 @@
 
     /* Responsive */
     @media(max-width: 768px){
-      .posts{
+      body {
         flex-direction: column;
-        align-items: center;
+      }
+      .sidebar {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+      }
+      .main {
+        padding: 20px;
+      }
+      .posts {
+        justify-content: center;
       }
     }
   </style>
 </head>
 <body>
 
-  <div class="profile-card">
-    <img src="20240929_131322_140.jpg" alt="Avatar Nguyễn Tú Quyên">
-    <h1>Nguyễn Tú Quyên</h1>
-    <p>Developer & Designer</p>
-    <div class="stats">
-      <div><span>0</span>Following</div>
-      <div><span>1.5k</span>Followers</div>
-      <div><span>200</span>Posts</div>
+  <div class="sidebar">
+    <div class="logo">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/NITC_Logo.svg/1200px-NITC_Logo.svg.png" alt="Logo">
     </div>
-    <div class="btns">
-      <button class="btn-message">Message</button>
-      <button class="btn-follow">Follow Me</button>
-    </div>
+    <ul>
+      <li class="active">📊 Dashboard</li>
+      <li>📈 Analytics</li>
+      <li>🔔 Notifications</li>
+      <li>⭐ Favourites</li>
+      <li>📦 Products</li>
+      <li>👥 Customers</li>
+    </ul>
   </div>
 
-  <div class="posts">
-    <div class="post-card">
-      <img src="OIP (2).jpg" alt="Piano">
-      <div class="post-content">
-        <div class="tag">Piano</div>
-        <h4>Piano là một loại nhạc cụ phím</h4>
-        <p>Piano là một loại nhạc cụ phím (keyboard instrument)...</p>
+  <div class="main">
+    <h1>Dashboard Overview</h1>
+    <p class="subtitle">
+      Welcome to your dashboard! This is the profile of Nguyễn Tú Quyên, integrated directly into the dashboard view.
+    </p>
+
+    <!-- Profile Section -->
+    <div class="profile-card">
+      <img src="20240929_131322_140.jpg" alt="Avatar Nguyễn Tú Quyên">
+      <h1>Nguyễn Tú Quyên</h1>
+      <p>Developer & Designer</p>
+      <div class="stats">
+        <div><span>0</span>Following</div>
+        <div><span>1.5k</span>Followers</div>
+        <div><span>200</span>Posts</div>
+      </div>
+      <div class="btns">
+        <button class="btn-message">Message</button>
+        <button class="btn-follow">Follow Me</button>
       </div>
     </div>
 
-    <div class="post-card">
-      <img src="OIP (3).jpg" alt="Organ">
-      <div class="post-content">
-        <div class="tag">Church Organ</div>
-        <h4>Đàn nhà thờ (organ)</h4>
-        <p>Đàn nhà thờ thường gọi là đàn organ nhà thờ (Church Organ)...</p>
+    <!-- Posts Section -->
+    <div class="posts">
+      <div class="post-card">
+        <img src="OIP (2).jpg" alt="Piano">
+        <div class="post-content">
+          <div class="tag">Piano</div>
+          <h4>Piano là một loại nhạc cụ phím</h4>
+          <p>Piano là một loại nhạc cụ phím (keyboard instrument)...</p>
+        </div>
       </div>
-    </div>
 
-    <div class="post-card">
-      <img src="OIP-_4_.jpg" alt="Church">
-      <div class="post-content">
-        <div class="tag">Church</div>
-        <h4>Nhà thờ</h4>
-        <p>Nhà thờ (Church) là nơi thờ phượng Thiên Chúa...</p>
+      <div class="post-card">
+        <img src="OIP (3).jpg" alt="Organ">
+        <div class="post-content">
+          <div class="tag">Church Organ</div>
+          <h4>Đàn nhà thờ (organ)</h4>
+          <p>Đàn nhà thờ thường gọi là đàn organ nhà thờ (Church Organ)...</p>
+        </div>
+      </div>
+
+      <div class="post-card">
+        <img src="OIP-_4_.jpg" alt="Church">
+        <div class="post-content">
+          <div class="tag">Church</div>
+          <h4>Nhà thờ</h4>
+          <p>Nhà thờ (Church) là nơi thờ phượng Thiên Chúa...</p>
+        </div>
       </div>
     </div>
   </div>
