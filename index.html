@@ -123,89 +123,80 @@
       font-family: 'Roboto', sans-serif;
 }
 /* Slider Container */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #fdfbfb, #f1c8f1, #c9f3e3, #c6d4f2);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
 .container {
-  width: 100%;
-  padding: 40px;
   max-width: 1200px;
+  width: 90%;
   margin: auto;
+  padding: 20px;
 }
 
 .card-list {
   display: flex;
-  list-style: none;
+  flex-wrap: wrap;
+  gap: 20px; /* khoảng cách giữa các card */
+  justify-content: center; /* căn giữa */
   padding: 0;
-  margin: 0;
-  width: 100%;
+  margin: 40px 0; /* top-bottom space */
+  list-style: none;
 }
 
 .card-item {
   background: #fff;
   border-radius: 15px;
-  overflow: hidden;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  flex: 1;
-  margin: 10px;
-}
-
-
-
-.card-link {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-  position: relative;
+  overflow: hidden;
+  width: 280px; /* set width phù hợp */
+  display: flex;
+  flex-direction: column;
 }
 
 .card-image {
   width: 100%;
-  height: 150px;
+  height: 180px;
   object-fit: cover;
 }
 
-.badge {
-  font-size: 12px;
-  padding: 5px 10px;
-  border-radius: 12px;
-  margin: 10px;
-  display: inline-block;
-}
-
-.badge-designer {
-  background: #ffb6d9;
-  color: #fff;
-}
-
-.badge-developer {
-  background: #add8e6;
-  color: #fff;
-}
-
-.badge-marketer {
-  background: #f4a261;
-  color: #fff;
+.card-content {
+  padding: 15px;
 }
 
 .card-title {
-  padding: 0 10px;
   font-size: 16px;
   font-weight: bold;
+  margin: 10px 0;
+}
+
+.badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 12px;
+  background: #ffb6b9;
+  color: white;
+  margin-bottom: 10px;
 }
 
 .card-button {
-  background: none;
-  border: 2px solid #ccc;
-  border-radius: 50%;
-  padding: 8px;
-  font-size: 18px;
+  align-self: flex-end;
   margin: 10px;
+  border: none;
+  background: #add8e6;
+  color: white;
+  border-radius: 10px;
+  padding: 5px 10px;
   cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.card-button:hover {
-  background: #ffb6b9;
-  color: #fff;
-  border-color: transparent;
 }
 </style>
 <body>
