@@ -168,59 +168,37 @@ header input {
   </style>
 </head>
 <body>
-  <div class="wrapper">
-    <header>
-      <h2>Playable PIANO</h2>
-      <div style="display: flex; align-items: center; gap: 20px;">
-        <div class="volume-slider">
-          Volume <input type="range" min="0" max="1" step="0.01" value="1">
+    <div class="wrapper">
+      <header>
+        <h2>Playable PIANO</h2>
+        <div class="column volume-slider">
+          <span>Volume</span><input type="range" min="0" max="1" value="0.5" step="any">
         </div>
-        <div class="keys-checkbox">
-          Show Keys <input type="checkbox" checked>
+        <div class="column keys-checkbox">
+          <span>Show Keys</span><input type="checkbox" checked>
         </div>
-      </div>
-    </header>
-
-    <div class="piano-keys">
-      <div class="key-group">
-        <div class="white key" data-key="a"><span>A</span></div>
-        <div class="black key" data-key="w"><span>W</span></div>
-      </div>
-      <div class="key-group">
-        <div class="white key" data-key="s"><span>S</span></div>
-        <div class="black key" data-key="e"><span>E</span></div>
-      </div>
-      <div class="key-group">
-        <div class="white key" data-key="d"><span>D</span></div>
-      </div>
-      <div class="key-group">
-        <div class="white key" data-key="f"><span>F</span></div>
-        <div class="black key" data-key="t"><span>T</span></div>
-      </div>
-      <div class="key-group">
-        <div class="white key" data-key="g"><span>G</span></div>
-        <div class="black key" data-key="y"><span>Y</span></div>
-      </div>
-      <div class="key-group">
-        <div class="white key" data-key="h"><span>H</span></div>
-        <div class="black key" data-key="u"><span>U</span></div>
-      </div>
-      <div class="key-group">
-        <div class="white key" data-key="j"><span>J</span></div>
-      </div>
-      <div class="key-group">
-        <div class="white key" data-key="k"><span>K</span></div>
-        <div class="black key" data-key="o"><span>O</span></div>
-      </div>
-      <div class="key-group">
-        <div class="white key" data-key="l"><span>L</span></div>
-        <div class="black key" data-key="p"><span>P</span></div>
-      </div>
-      <div class="key-group">
-        <div class="white key" data-key=";"><span>;</span></div>
-      </div>
+      </header>
+      <ul class="piano-keys">
+        <li class="key white" data-key="a"><span>a</span></li>
+        <li class="key black" data-key="w"><span>w</span></li>
+        <li class="key white" data-key="s"><span>s</span></li>
+        <li class="key black" data-key="e"><span>e</span></li>
+        <li class="key white" data-key="d"><span>d</span></li>
+        <li class="key white" data-key="f"><span>f</span></li>
+        <li class="key black" data-key="t"><span>t</span></li>
+        <li class="key white" data-key="g"><span>g</span></li>
+        <li class="key black" data-key="y"><span>y</span></li>
+        <li class="key white" data-key="h"><span>h</span></li>
+        <li class="key black" data-key="u"><span>u</span></li>
+        <li class="key white" data-key="j"><span>j</span></li>
+        <li class="key white" data-key="k"><span>k</span></li>
+        <li class="key black" data-key="o"><span>o</span></li>
+        <li class="key white" data-key="l"><span>l</span></li>
+        <li class="key black" data-key="p"><span>p</span></li>
+        <li class="key white" data-key=";"><span>;</span></li>
+      </ul>
     </div>
-  </div>
+  </body>
   <script>
     const pianoKeys = document.querySelectorAll(".key");
     const volumeSlider = document.querySelector(".volume-slider input");
@@ -259,5 +237,4 @@ header input {
       pianoKeys.forEach(key => key.classList.toggle("hide"));
     });
   </script>
-</body>
 </html>
