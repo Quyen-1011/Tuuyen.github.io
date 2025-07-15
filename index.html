@@ -12,21 +12,29 @@
     body {
       margin: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #fdfbfb, #f1c8f1, #c9f3e3, #c6d4f2);
+      background: linear-gradient(135deg, #e0f7fa, #c8e6c9);
       background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
       display: flex;
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
-      padding: 20px;
       box-sizing: border-box;
     }
 
     @keyframes gradientBG {
-      0% {background-position:0% 50%;}
-      50% {background-position:100% 50%;}
-      100% {background-position:0% 50%;}
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 30px 20px;
+      box-sizing: border-box;
+      text-align: center;
     }
 
     .profile-card {
@@ -34,9 +42,9 @@
       border-radius: 20px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       padding: 20px;
-      margin: 20px 0;
+      margin: 0 auto 30px;
       text-align: center;
-      width: 300px;
+      width: 320px;
     }
 
     .profile-card img {
@@ -49,21 +57,20 @@
 
     .profile-card h2 {
       margin: 10px 0 5px;
+      font-size: 20px;
     }
 
     .profile-card p {
       color: gray;
       margin: 0 0 15px;
+      font-size: 14px;
     }
 
     .stats {
       display: flex;
       justify-content: space-around;
       margin-bottom: 15px;
-    }
-
-    .stats div {
-      text-align: center;
+      font-size: 13px;
     }
 
     .buttons a {
@@ -77,11 +84,12 @@
       display: inline-block;
       background: #add8e6;
       color: white;
+      font-size: 13px;
     }
 
     .swiper {
       width: 100%;
-      max-width: 1200px;
+      max-width: 1280px;
       padding: 40px 0;
     }
 
@@ -90,7 +98,7 @@
       border-radius: 15px;
       overflow: hidden;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      width: 250px;
+      width: 320px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -98,14 +106,14 @@
 
     .swiper-slide img {
       width: 100%;
-      height: 150px;
+      height: 180px;
       object-fit: cover;
     }
 
     .badge {
       display: inline-block;
-      padding: 4px 8px;
-      font-size: 12px;
+      padding: 6px 10px;
+      font-size: 13px;
       border-radius: 8px;
       background: #ffb6b9;
       color: white;
@@ -113,104 +121,113 @@
     }
 
     .card-title {
-      font-size: 14px;
+      font-size: 15px;
       font-weight: bold;
-      margin: 10px;
+      margin: 0 10px 10px;
+      text-align: left;
     }
 
     .card-button {
       align-self: flex-end;
       margin: 10px;
-      padding: 5px 10px;
+      padding: 6px 12px;
       border: none;
       border-radius: 10px;
       background: #add8e6;
       color: white;
       cursor: pointer;
+      font-size: 13px;
     }
 
     /* Responsive */
+    @media (max-width: 1024px) {
+      .swiper-slide {
+        width: 280px;
+      }
+    }
+
     @media (max-width: 768px) {
       .swiper-slide {
-        width: 200px;
+        width: 240px;
       }
     }
 
     @media (max-width: 480px) {
       .swiper-slide {
-        width: 150px;
+        width: 200px;
       }
     }
   </style>
 </head>
 
 <body>
+  <div class="container">
 
-  <div class="profile-card">
-    <img src="20240929_131322_140.jpg" alt="Avatar">
-    <h2>Nguyễn Tú Quyên</h2>
-    <p>Developer & Designer</p>
-    <div class="stats">
-      <div><strong>0</strong><br>Following</div>
-      <div><strong>1.5k</strong><br>Followers</div>
-      <div><strong>200</strong><br>Posts</div>
-    </div>
-    <div class="buttons">
-      <a href="https://www.facebook.com/nquyen05.20" target="_blank">Message</a>
-      <a href="https://www.facebook.com/nquyen05.20" target="_blank">Follow Me</a>
-    </div>
-  </div>
-
-  <!-- Card Slider -->
-  <div class="swiper mySwiper">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide">
-        <a href="https://www.facebook.com/nquyen05.20">
-          <img src="z6805791378776_9ec87d6eb24a1e6b765a32218208f785.jpg" alt="">
-          <p class="badge">My family</p>
-          <h2 class="card-title">My family has 4 people: My dad, my mom, my sister and me</h2>
-          <button class="card-button">link</button>
-        </a>
+    <!-- Profile Card -->
+    <div class="profile-card">
+      <img src="20240929_131322_140.jpg" alt="Avatar">
+      <h2>Nguyễn Tú Quyên</h2>
+      <p>Developer & Designer</p>
+      <div class="stats">
+        <div><strong>0</strong><br>Following</div>
+        <div><strong>1.5k</strong><br>Followers</div>
+        <div><strong>200</strong><br>Posts</div>
       </div>
-
-      <div class="swiper-slide">
-        <a href="https://www.facebook.com/nquyen05.20">
-          <img src="z6806191877794_6e96853b33310b326acede37f2d1ca22.jpg" alt="">
-          <p class="badge">Great with kids</p>
-          <h2 class="card-title">I really like children a lot because they’re so beautiful and cute.</h2>
-          <button class="card-button">link</button>
-        </a>
-      </div>
-
-      <div class="swiper-slide">
-        <a href="https://www.facebook.com/nquyen05.20">
-          <img src="z6806114521505_bd9cce3d7f5edd2ed9a55ec3536a525c.jpg" alt="">
-          <p class="badge">Pianist</p>
-          <h2 class="card-title">Piano is my favorite subject, and I play it during the religious activities I join.</h2>
-          <button class="card-button">link</button>
-        </a>
-      </div>
-
-      <div class="swiper-slide">
-        <a href="https://www.facebook.com/nquyen05.20">
-          <img src="z6805791359585_9ab0ab16dbb049ccd796f47daca68348.jpg" alt="">
-          <p class="badge">Software Engineer</p>
-          <h2 class="card-title">I have a great passion for learning about computers, and I aspire to become a skilled software engineer.</h2>
-          <button class="card-button">link</button>
-        </a>
+      <div class="buttons">
+        <a href="https://www.facebook.com/nquyen05.20" target="_blank">Message</a>
+        <a href="https://www.facebook.com/nquyen05.20" target="_blank">Follow Me</a>
       </div>
     </div>
 
-    <!-- Navigation buttons -->
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-pagination"></div>
+    <!-- Swiper Slider -->
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <a href="https://www.facebook.com/nquyen05.20">
+            <img src="z6805791378776_9ec87d6eb24a1e6b765a32218208f785.jpg" alt="">
+            <p class="badge">My Family</p>
+            <h2 class="card-title">My family has 4 people: My dad, my mom, my sister and me</h2>
+            <button class="card-button">link</button>
+          </a>
+        </div>
+
+        <div class="swiper-slide">
+          <a href="https://www.facebook.com/nquyen05.20">
+            <img src="z6806191877794_6e96853b33310b326acede37f2d1ca22.jpg" alt="">
+            <p class="badge">Great with Kids</p>
+            <h2 class="card-title">I really like children a lot because they’re so beautiful and cute.</h2>
+            <button class="card-button">link</button>
+          </a>
+        </div>
+
+        <div class="swiper-slide">
+          <a href="https://www.facebook.com/nquyen05.20">
+            <img src="z6806114521505_bd9cce3d7f5edd2ed9a55ec3536a525c.jpg" alt="">
+            <p class="badge">Pianist</p>
+            <h2 class="card-title">Piano is my favorite subject, and I play it during the religious activities I join.</h2>
+            <button class="card-button">link</button>
+          </a>
+        </div>
+
+        <div class="swiper-slide">
+          <a href="https://www.facebook.com/nquyen05.20">
+            <img src="z6805791359585_9ab0ab16dbb049ccd796f47daca68348.jpg" alt="">
+            <p class="badge">Software Engineer</p>
+            <h2 class="card-title">I have a great passion for learning about computers, and I aspire to become a skilled software engineer.</h2>
+            <button class="card-button">link</button>
+          </a>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-pagination"></div>
+    </div>
   </div>
 
   <!-- Swiper JS -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-  <!-- Initialize Swiper -->
   <script>
     const swiper = new Swiper('.mySwiper', {
       slidesPerView: 3,
@@ -225,7 +242,7 @@
         prevEl: '.swiper-button-prev',
       },
       autoplay: {
-        delay: 2500,
+        delay: 3000,
         disableOnInteraction: false,
       },
       breakpoints: {
