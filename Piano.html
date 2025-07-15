@@ -149,15 +149,15 @@
     let volume = 1;
 
     const playTune = key => {
-      const audio = new Audio(`tunes/${key}.mp3`);
-      audio.volume = volume;
-      audio.play();
+  audio.src = `tunes/${key}.mp3`;  
+  audio.volume = volume;           
+  audio.play();
 
-      const keyElement = document.querySelector(`.key[data-key="${key}"]`);
-      if (keyElement) {
-        keyElement.classList.add("active");
-        setTimeout(() => keyElement.classList.remove("active"), 150);
-      }
+  const keyElement = document.querySelector(`.key[data-key="${key}"]`);
+  if (keyElement) {
+    keyElement.classList.add("active");
+    setTimeout(() => keyElement.classList.remove("active"), 150);
+  }
     };
 
     pianoKeys.forEach(key => {
