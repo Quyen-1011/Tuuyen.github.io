@@ -5,6 +5,167 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Profile Card Slider</title>
 </head>
+<style>
+  body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to bottom right, #ffe0c3, #ffb6b9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh; /* ✅ thêm dòng này */
+}
+
+    .profile-card {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin-top: 30px;
+      text-align: center;
+      width: 300px;
+    }
+
+    .profile-card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 3px solid #ffb6b9;
+      object-fit: cover;
+    }
+
+    .profile-card h2 {
+      margin: 10px 0 5px;
+    }
+
+    .profile-card p {
+      color: gray;
+      margin: 0 0 15px;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 15px;
+    }
+
+    .stats div {
+      text-align: center;
+    }
+
+    .buttons button, .buttons a {
+      border: none;
+      border-radius: 20px;
+      padding: 10px 20px;
+      margin: 0 5px;
+      cursor: pointer;
+      font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .buttons .message {
+      background: #ffb6b9;
+      color: white;
+    }
+
+    .buttons .follow {
+      background: #add8e6;
+      color: white;
+    }
+
+    .cards {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 30px;
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      width: 250px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+    }
+
+    .card .label {
+      font-size: 12px;
+      color: white;
+      background: #ffb6b9;
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 10px;
+      margin: 10px;
+    }
+
+    .card .description {
+      font-size: 14px;
+      margin: 0 10px 10px;
+    }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  background: linear-gradient(to bottom right, #e0eaff, #f5f8ff);
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cards {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  width: 280px;
+  padding: 16px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.card img {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+  height: 180px;
+  margin-bottom: 12px;
+}
+
+.label {
+  font-weight: bold;
+  font-size: 1rem;
+  color: #4b4bff;
+  margin-bottom: 8px;
+}
+
+.description {
+  font-size: 0.95rem;
+  color: #333;
+}
+</style>
 <body>
   <div class="profile-card">
     <img src="20240929_131322_140.jpg" alt="Avatar">
@@ -26,7 +187,7 @@
       <a href="https://www.facebook.com/nquyen05.20" target="_blank" class="follow">Follow Me</a>
     </div>
   </div>
-
+  
   <div class="cards">
     <div class="card">
       <img src="OIP (2).jpg" alt="Piano">
