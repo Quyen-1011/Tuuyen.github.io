@@ -3,38 +3,74 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Nguyễn Tú Quyên - Profile Card Slider</title>
+  <title>Nguyễn Tú Quyên - Profile Card Dashboard</title>
 
   <!-- Swiper CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
   <style>
-    body {
+    * {
+      box-sizing: border-box;
       margin: 0;
+      padding: 0;
+    }
+
+    body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #e0f7fa, #c8e6c9);
+      background: linear-gradient(135deg, #fdfbfb, #f1c8f1, #c9f3e3, #c6d4f2);
       background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       min-height: 100vh;
-      box-sizing: border-box;
+      display: flex;
     }
 
     @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      0% {background-position:0% 50%;}
+      50% {background-position:100% 50%;}
+      100% {background-position:0% 50%;}
     }
 
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-      width: 100%;
-      padding: 30px 20px;
-      box-sizing: border-box;
+    .sidebar {
+      width: 250px;
+      background-color: #1e293b;
+      color: white;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo {
       text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .logo img {
+      width: 80px;
+      border-radius: 50%;
+    }
+
+    .nav a {
+      display: block;
+      padding: 12px;
+      color: #cbd5e1;
+      text-decoration: none;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      transition: 0.3s;
+    }
+
+    .nav a.active,
+    .nav a:hover {
+      background-color: #8b5cf6;
+      color: #fff;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .profile-card {
@@ -42,9 +78,9 @@
       border-radius: 20px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       padding: 20px;
-      margin: 0 auto 30px;
+      margin: 20px 0;
       text-align: center;
-      width: 320px;
+      width: 300px;
     }
 
     .profile-card img {
@@ -57,20 +93,21 @@
 
     .profile-card h2 {
       margin: 10px 0 5px;
-      font-size: 20px;
     }
 
     .profile-card p {
       color: gray;
       margin: 0 0 15px;
-      font-size: 14px;
     }
 
     .stats {
       display: flex;
       justify-content: space-around;
       margin-bottom: 15px;
-      font-size: 13px;
+    }
+
+    .stats div {
+      text-align: center;
     }
 
     .buttons a {
@@ -84,12 +121,11 @@
       display: inline-block;
       background: #add8e6;
       color: white;
-      font-size: 13px;
     }
 
     .swiper {
       width: 100%;
-      max-width: 1280px;
+      max-width: 1200px;
       padding: 40px 0;
     }
 
@@ -98,22 +134,21 @@
       border-radius: 15px;
       overflow: hidden;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      width: 320px;
+      width: 250px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
     }
 
     .swiper-slide img {
       width: 100%;
-      height: 180px;
+      height: 150px;
       object-fit: cover;
     }
 
     .badge {
       display: inline-block;
-      padding: 6px 10px;
-      font-size: 13px;
+      padding: 4px 8px;
+      font-size: 12px;
       border-radius: 8px;
       background: #ffb6b9;
       color: white;
@@ -121,49 +156,52 @@
     }
 
     .card-title {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: bold;
-      margin: 0 10px 10px;
-      text-align: left;
+      margin: 10px;
     }
 
     .card-button {
       align-self: flex-end;
       margin: 10px;
-      padding: 6px 12px;
+      padding: 5px 10px;
       border: none;
       border-radius: 10px;
       background: #add8e6;
       color: white;
       cursor: pointer;
-      font-size: 13px;
     }
 
-    /* Responsive */
-    @media (max-width: 1024px) {
-      .swiper-slide {
-        width: 280px;
-      }
+    .swiper-button-next,
+    .swiper-button-prev {
+      color: #333;
     }
 
     @media (max-width: 768px) {
       .swiper-slide {
-        width: 240px;
+        width: 200px;
       }
     }
 
     @media (max-width: 480px) {
       .swiper-slide {
-        width: 200px;
+        width: 150px;
       }
     }
   </style>
 </head>
-
 <body>
-  <div class="container">
+  <div class="sidebar">
+    <div class="logo">
+      <img src="logo.png" alt="Logo">
+      <h3>Tú Quyên</h3>
+    </div>
+    <nav class="nav">
+      <a href="profile.html" class="active">Profile</a>
+    </nav>
+  </div>
 
-    <!-- Profile Card -->
+  <div class="main-content">
     <div class="profile-card">
       <img src="20240929_131322_140.jpg" alt="Avatar">
       <h2>Nguyễn Tú Quyên</h2>
@@ -179,27 +217,25 @@
       </div>
     </div>
 
-    <!-- Swiper Slider -->
+    <!-- Card Slider -->
     <div class="swiper mySwiper">
       <div class="swiper-wrapper">
         <div class="swiper-slide">
           <a href="https://www.facebook.com/nquyen05.20">
             <img src="z6805791378776_9ec87d6eb24a1e6b765a32218208f785.jpg" alt="">
-            <p class="badge">My Family</p>
+            <p class="badge">My family</p>
             <h2 class="card-title">My family has 4 people: My dad, my mom, my sister and me</h2>
             <button class="card-button">link</button>
           </a>
         </div>
-
         <div class="swiper-slide">
           <a href="https://www.facebook.com/nquyen05.20">
             <img src="z6806191877794_6e96853b33310b326acede37f2d1ca22.jpg" alt="">
-            <p class="badge">Great with Kids</p>
+            <p class="badge">Great with kids</p>
             <h2 class="card-title">I really like children a lot because they’re so beautiful and cute.</h2>
             <button class="card-button">link</button>
           </a>
         </div>
-
         <div class="swiper-slide">
           <a href="https://www.facebook.com/nquyen05.20">
             <img src="z6806114521505_bd9cce3d7f5edd2ed9a55ec3536a525c.jpg" alt="">
@@ -208,7 +244,6 @@
             <button class="card-button">link</button>
           </a>
         </div>
-
         <div class="swiper-slide">
           <a href="https://www.facebook.com/nquyen05.20">
             <img src="z6805791359585_9ab0ab16dbb049ccd796f47daca68348.jpg" alt="">
@@ -218,8 +253,6 @@
           </a>
         </div>
       </div>
-
-      <!-- Navigation -->
       <div class="swiper-button-next"></div>
       <div class="swiper-button-prev"></div>
       <div class="swiper-pagination"></div>
@@ -242,7 +275,7 @@
         prevEl: '.swiper-button-prev',
       },
       autoplay: {
-        delay: 3000,
+        delay: 2500,
         disableOnInteraction: false,
       },
       breakpoints: {
