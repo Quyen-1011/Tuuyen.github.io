@@ -22,6 +22,7 @@
       animation: gradientBG 15s ease infinite;
       min-height: 100vh;
       display: flex;
+      flex-wrap: wrap;
     }
 
     @keyframes gradientBG {
@@ -57,6 +58,7 @@
       border-radius: 10px;
       margin-bottom: 10px;
       transition: 0.3s;
+      font-size: 16px;
     }
 
     .nav a.active,
@@ -177,15 +179,79 @@
       color: #333;
     }
 
-    @media (max-width: 768px) {
+    /* ===== Responsive Design ===== */
+    @media (max-width: 1024px) {
       .swiper-slide {
-        width: 200px;
+        width: 220px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 10px;
+        flex-wrap: wrap;
+      }
+
+      .sidebar .logo {
+        display: none;
+      }
+
+      .nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+      }
+
+      .nav a {
+        padding: 8px 12px;
+        font-size: 14px;
+      }
+
+      .main-content {
+        padding: 15px;
+        align-items: stretch;
+      }
+
+      .profile-card {
+        width: 100%;
+      }
+
+      .swiper {
+        padding: 20px 0;
       }
     }
 
     @media (max-width: 480px) {
+      .nav a {
+        font-size: 12px;
+        padding: 6px 10px;
+      }
+
+      .card-title {
+        font-size: 12px;
+      }
+
+      .badge {
+        font-size: 10px;
+        padding: 2px 6px;
+      }
+
+      .card-button {
+        font-size: 12px;
+        padding: 5px 8px;
+      }
+
       .swiper-slide {
-        width: 150px;
+        width: 90% !important;
+        margin: 0 auto;
       }
     }
   </style>
@@ -201,10 +267,11 @@
       <a href="draw.html" class="active">Draw</a>
       <a href="game.html" class="active">Game memory card</a>
       <a href="Hangman.html" class="active">Game hangman</a>
-      <a href="Image Editor.html" class="active"> Image Editor</a>
+      <a href="Image Editor.html" class="active">Image Editor</a>
       <a href="Piano.html" class="active">Piano</a>
     </nav>
   </div>
+
   <div class="main-content">
     <div class="profile-card">
       <img src="20240929_131322_140.jpg" alt="Avatar">
@@ -221,7 +288,6 @@
       </div>
     </div>
 
-    <!-- Card Slider -->
     <div class="swiper mySwiper">
       <div class="swiper-wrapper">
         <div class="swiper-slide">
