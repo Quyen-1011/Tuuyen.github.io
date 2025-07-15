@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Profile Card Slider</title>
+  <title>Nguyễn Tú Quyên - Profile Card Slider</title>
 
   <!-- Swiper CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -18,7 +18,9 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-height: 100vh; 
+      min-height: 100vh;
+      padding: 20px;
+      box-sizing: border-box;
     }
 
     @keyframes gradientBG {
@@ -32,7 +34,7 @@
       border-radius: 20px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       padding: 20px;
-      margin-top: 30px;
+      margin: 20px 0;
       text-align: center;
       width: 300px;
     }
@@ -64,7 +66,7 @@
       text-align: center;
     }
 
-    .buttons button, .buttons a {
+    .buttons a {
       border: none;
       border-radius: 20px;
       padding: 10px 20px;
@@ -73,21 +75,14 @@
       font-weight: bold;
       text-decoration: none;
       display: inline-block;
-    }
-
-    .buttons .message {
-      background: #ffb6b9;
-      color: white;
-    }
-
-    .buttons .follow {
       background: #add8e6;
       color: white;
     }
 
     .swiper {
       width: 100%;
-      padding: 20px 0;
+      max-width: 1200px;
+      padding: 40px 0;
     }
 
     .swiper-slide {
@@ -96,6 +91,9 @@
       overflow: hidden;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       width: 250px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .swiper-slide img {
@@ -130,10 +128,24 @@
       color: white;
       cursor: pointer;
     }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .swiper-slide {
+        width: 200px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .swiper-slide {
+        width: 150px;
+      }
+    }
   </style>
 </head>
 
 <body>
+
   <div class="profile-card">
     <img src="20240929_131322_140.jpg" alt="Avatar">
     <h2>Nguyễn Tú Quyên</h2>
@@ -144,8 +156,8 @@
       <div><strong>200</strong><br>Posts</div>
     </div>
     <div class="buttons">
-      <a href="https://www.facebook.com/nquyen05.20" target="_blank" class="follow">Message</a>
-      <a href="https://www.facebook.com/nquyen05.20" target="_blank" class="follow">Follow Me</a>
+      <a href="https://www.facebook.com/nquyen05.20" target="_blank">Message</a>
+      <a href="https://www.facebook.com/nquyen05.20" target="_blank">Follow Me</a>
     </div>
   </div>
 
@@ -216,6 +228,17 @@
         delay: 2500,
         disableOnInteraction: false,
       },
+      breakpoints: {
+        320: {
+          slidesPerView: 1,
+        },
+        640: {
+          slidesPerView: 2,
+        },
+        1024: {
+          slidesPerView: 3,
+        },
+      }
     });
   </script>
 </body>
