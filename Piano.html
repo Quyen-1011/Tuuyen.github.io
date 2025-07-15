@@ -148,10 +148,11 @@
 
     let volume = 1;
 
-    const playTune = key => {
-  audio.src = `tunes/a.mp3`;  
-  audio.volume = volume;           
+   const playTune = key => {
+  audio.src = `tunes/${key}.mp3`;  // đường dẫn tới thư mục tunes
+  audio.volume = volume;
   audio.play();
+};
 
   const keyElement = document.querySelector(`.key[data-key="${key}"]`);
   if (keyElement) {
