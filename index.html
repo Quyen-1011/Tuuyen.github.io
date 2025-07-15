@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Profile Card </title>
+  <title>Profile Card Slider</title>
   <style>
     body {
   margin: 0;
@@ -15,22 +15,42 @@
   min-height: 100vh; /* ✅ thêm dòng này */
 }
 
+    .profile-card {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin-top: 30px;
+      text-align: center;
+      width: 300px;
+    }
+
+    .profile-card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 3px solid #ffb6b9;
+      object-fit: cover;
+    }
+
     .profile-card h2 {
-  font-size: 22px; /* tăng từ 20px lên 22px */
-  font-weight: 700;
-}
+      margin: 10px 0 5px;
+    }
 
-.profile-card p {
-  font-size: 16px; /* tăng từ 14px lên 16px */
-}
+    .profile-card p {
+      color: gray;
+      margin: 0 0 15px;
+    }
 
-.stats div {
-  font-size: 15px; /* tăng từ 13px lên 15px */
-}
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 15px;
+    }
 
-.stats div strong {
-  font-size: 17px; /* tăng từ 15px lên 17px */
-}
+    .stats div {
+      text-align: center;
+    }
 
     .buttons button, .buttons a {
       border: none;
