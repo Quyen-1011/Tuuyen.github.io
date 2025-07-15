@@ -122,6 +122,86 @@
       padding: 0;
       font-family: 'Roboto', sans-serif;
 }
+/* Slider Container */
+.container {
+  width: 100%;
+  padding: 40px;
+  max-width: 1200px;
+}
+
+.card-list {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card-item {
+  background: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 0;
+}
+
+.card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+}
+
+.card-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.badge {
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 12px;
+  margin: 10px;
+  display: inline-block;
+}
+
+.badge-designer {
+  background: #ffb6d9;
+  color: #fff;
+}
+
+.badge-developer {
+  background: #add8e6;
+  color: #fff;
+}
+
+.badge-marketer {
+  background: #f4a261;
+  color: #fff;
+}
+
+.card-title {
+  padding: 0 10px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.card-button {
+  background: none;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  padding: 8px;
+  font-size: 18px;
+  margin: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.card-button:hover {
+  background: #ffb6b9;
+  color: #fff;
+  border-color: transparent;
+}
 </style>
 <body>
   <div class="profile-card">
@@ -144,26 +224,59 @@
       <a href="https://www.facebook.com/nquyen05.20" target="_blank" class="follow">Follow Me</a>
     </div>
   </div>
-  
-  <div class="cards">
-    <div class="card">
-      <img src="OIP (2).jpg" alt="Piano">
-      <div class="label">Piano</div>
-      <div class="description">Piano là một loại nhạc cụ phím (keyboard instrument)</div>
-    </div>
+  <!-- CARD SLIDER -->
+  <div class="container swiper">
+    <ul class="card-list swiper-wrapper">
+      <li class="card-item swiper-slide">
+        <a href="https://www.facebook.com/nquyen05.20" class="card-link">
+          <img src="z6805791378776_9ec87d6eb24a1e6b765a32218208f785.jpg" class="card-image">
+          <p class="badge badge-designer">My family</p>
+          <h2 class="card-title">My family has 4 people: My dad, my mom, my sister and me</h2>
+          <button class="card-button material-symbols-rounded">arrow_forward</button>
+        </a>
+      </li>
+      <li class="card-item swiper-slide">
+        <a href="https://www.facebook.com/nquyen05.20" class="card-link">
+          <img src="z6805791340356_8c1d19b4d859f645c0ec7f4b76f19691.jpg" alt="Great with kids" class="Great with kids image">
+          <p class="badge badge-developer">Great with kids</p>
+          <h2 class="card-title">Lorem ipsum dolor sit explicabo adipisicing elit</h2>
+          <button class="card-button material-symbols-rounded">arrow_forward</button>
+        </a>
+      </li>
+      <li class="card-item swiper-slide">
+        <a href="#" class="card-link">
+          <img src="images/marketer.jpg" alt="Marketer" class="card-image">
+          <p class="badge badge-marketer">Marketer</p>
+          <h2 class="card-title">Lorem ipsum dolor sit explicabo adipisicing elit</h2>
+          <button class="card-button material-symbols-rounded">arrow_forward</button>
+        </a>
+      </li>
+    </ul>
 
-    <div class="card">
-      <img src="OIP (3).jpg" alt="Organ">
-
-      <div class="label">Church Organ</div>
-      <div class="description">Đàn nhà thờ thường gọi là đàn organ nhà thờ (Church Organ)</div>
-    </div>
-
-    <div class="card">
-      <img src="OIP-_4_.jpg" alt="Church">
-      <div class="label">Church</div>
-      <div class="description">Nhà thờ (Church) là nơi thờ phượng Thiên Chúa, nơi cộng đoàn Kitô hữu tụ họp</div>
-    </div>
+    <!-- Swiper navigation -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-pagination"></div>
   </div>
+
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <!-- Custom JS -->
+  <script>
+    const swiper = new Swiper('.swiper', {
+      slidesPerView: 3,
+      spaceBetween: 30,
+      loop: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev'
+      }
+    });
+  </script>
 </body>
 </html>
