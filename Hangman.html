@@ -66,6 +66,59 @@
       background: black;
     }
 
+    .body-part {
+      position: absolute;
+      background: black;
+      display: none;
+    }
+
+    .head {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      top: 5px;
+      left: 85px;
+    }
+
+    .body {
+      width: 5px;
+      height: 50px;
+      top: 35px;
+      left: 99px;
+    }
+
+    .left-arm {
+      width: 30px;
+      height: 5px;
+      top: 45px;
+      left: 70px;
+      transform: rotate(-30deg);
+    }
+
+    .right-arm {
+      width: 30px;
+      height: 5px;
+      top: 45px;
+      left: 100px;
+      transform: rotate(30deg);
+    }
+
+    .left-leg {
+      width: 30px;
+      height: 5px;
+      top: 85px;
+      left: 70px;
+      transform: rotate(30deg);
+    }
+
+    .right-leg {
+      width: 30px;
+      height: 5px;
+      top: 85px;
+      left: 100px;
+      transform: rotate(-30deg);
+    }
+
     .game-box {
       flex: 1;
     }
@@ -125,6 +178,14 @@
         <div class="top"></div>
         <div class="pole"></div>
         <div class="base"></div>
+
+        <!-- Các phần của cơ thể -->
+        <div class="head body-part"></div>
+        <div class="body body-part"></div>
+        <div class="left-arm body-part"></div>
+        <div class="right-arm body-part"></div>
+        <div class="left-leg body-part"></div>
+        <div class="right-leg body-part"></div>
       </div>
       <h2>HANGMAN GAME</h2>
     </div>
@@ -149,6 +210,7 @@
     const hintText = document.getElementById("hintText");
     const wrongCount = document.getElementById("wrongCount");
     const keyboard = document.getElementById("keyboard");
+    const bodyParts = document.querySelectorAll(".body-part");
 
     hintText.textContent = hint;
 
@@ -168,22 +230,25 @@
       } else {
         wrongGuesses++;
         wrongCount.textContent = wrongGuesses;
+        if (wrongGuesses <= maxWrong) {
+          bodyParts[wrongGuesses - 1].style.display = "block";
+        }
       }
 
       updateWordDisplay();
 
       if (wrongGuesses >= maxWrong) {
         setTimeout(() => {
-          alert("Game Over! The word was: " + word);
+          alert("💀 Game Over! The word was: " + word);
           location.reload();
-        }, 200);
+        }, 300);
       }
 
       if (word.split("").every(l => guessedLetters.includes(l))) {
         setTimeout(() => {
           alert("🎉 Congratulations! You guessed the word.");
           location.reload();
-        }, 200);
+        }, 300);
       }
     }
 
