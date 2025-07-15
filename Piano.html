@@ -149,7 +149,7 @@
     let volume = 1;
 
    const playTune = key => {
-  const audio = new Audio(`tunes/${key}.mp3`);
+  const audio = new Audio(`https://raw.githubusercontent.com/Quyen-1011/Tuuyen.github.io/main/tunes/${key}.mp3`);
   audio.volume = volume;
   audio.play();
 
@@ -159,6 +159,7 @@
     setTimeout(() => keyElement.classList.remove("active"), 150);
   }
 };
+
 
     pianoKeys.forEach(key => {
       key.addEventListener("click", () => playTune(key.dataset.key));
@@ -178,9 +179,5 @@
       pianoKeys.forEach(key => key.classList.toggle("hide"));
     });
   </script>
-  <audio controls>
-  <source src="https://raw.githubusercontent.com/Quyen-1011/Tuuyen.github.io/a0c1be112cf4bbca40c294de46db2e13f26aa16f/tunes/a.mp3" type="audio/mpeg">
-  Trình duyệt không hỗ trợ phát âm thanh.
-</audio>
 </body>
 </html>
