@@ -164,8 +164,14 @@ body {
 
 .card-image {
   width: 100%;
-  height: 180px;
+  height: 200px;
   object-fit: cover;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+.card-item:hover {
+  transform: translateY(-5px);
+  transition: transform 0.3s ease;
 }
 
 .card-content {
