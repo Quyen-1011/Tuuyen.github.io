@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hangman Game</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: #6366f1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      display: flex;
+      gap: 40px;
+      max-width: 1000px;
+      width: 100%;
+    }
+
+    .hangman-box {
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .gallow {
+      position: relative;
+      width: 120px;
+      height: 180px;
+      margin: 0 auto 20px;
+    }
+
+    .gallow .base {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: black;
+    }
+
+    .gallow .pole {
+      position: absolute;
+      bottom: 0;
+      left: 20px;
+      width: 5px;
+      height: 100%;
+      background: black;
+    }
+
+    .gallow .top {
+      position: absolute;
+      top: 0;
+      left: 20px;
+      width: 80px;
+      height: 5px;
+      background: black;
+    }
+
+    .game-box {
+      flex: 1;
+    }
+
+    .word-display {
+      font-size: 32px;
+      letter-spacing: 10px;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    .hint, .guesses {
+      margin: 10px 0;
+      font-size: 18px;
+    }
+
+    .guesses span {
+      color: red;
+      font-weight: bold;
+    }
+
+    .keyboard {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .keyboard button {
+      padding: 10px 15px;
+      border: none;
+      background: #6366f1;
+      color: white;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 40px;
+    }
+
+    .keyboard button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="hangman-box">
+      <div class="gallow">
+        <div class="top"></div>
+        <div class="pole"></div>
+        <div class="base"></div>
+      </div>
+      <h2>HANGMAN GAME</h2>
+    </div>
+
+    <div class="game-box">
+      <div class="word-display" id="wordDisplay">_ _ _ _ _</div>
+      <h4 class="hint">Hint: <span id="hintText">A large natural stream of water flowing in a channel to the sea, a lake, or another such stream.</span></h4>
+      <h4 class="guesses">Incorrect guesses: <span id="wrongCount">0</span> / 6</h4>
+
+      <div class="keyboard" id="keyboard"></div>
+    </div>
+  </div>
+
+  <script>
+    const word = "RIVER";
+    const hint = "A large natural stream of water flowing in a channel to the sea, a lake, or another such stream.";
+    const maxWrong = 6;
+    let guessedLetters = [];
+    let wrongGuesses = 0;
+
+    const wordDisplay = document.getElementById("wordDisplay");
+    const hintText = document.getElementById("hintText");
+    const wrongCount = document.getElementById("wrongCount");
+    const keyboard = document.getElementById("keyboard");
+
+    hintText.textContent = hint;
+
+    function updateWordDisplay() {
+      wordDisplay.textContent = word
+        .split("")
+        .map(letter => guessedLetters.includes(letter) ? letter : "_")
+        .join(" ");
+    }
+
+    function handleGuess(letter) {
+      const button = document.getElementById(`btn-${letter}`);
+      button.disabled = true;
+
+      if (word.includes(letter)) {
+        guessedLetters.push(letter);
+      } else {
+        wrongGuesses++;
+        wrongCount.textContent = wrongGuesses;
+      }
+
+      updateWordDisplay();
+
+      if (wrongGuesses >= maxWrong) {
+        setTimeout(() => {
+          alert("Game Over! The word was: " + word);
+          location.reload();
+        }, 200);
+      }
+
+      if (word.split("").every(l => guessedLetters.includes(l))) {
+        setTimeout(() => {
+          alert("🎉 Congratulations! You guessed the word.");
+          location.reload();
+        }, 200);
+      }
+    }
+
+    function createKeyboard() {
+      for (let i = 65; i <= 90; i++) {
+        const letter = String.fromCharCode(i);
+        const button = document.createElement("button");
+        button.textContent = letter;
+        button.id = `btn-${letter}`;
+        button.addEventListener("click", () => handleGuess(letter));
+        keyboard.appendChild(button);
+      }
+    }
+
+    updateWordDisplay();
+    createKeyboard();
+  </script>
+</body>
+</html>
