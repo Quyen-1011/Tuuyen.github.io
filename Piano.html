@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Playable Piano</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #e3f2fd;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .wrapper {
+      background: #1f1f1f;
+      color: white;
+      border-radius: 25px;
+      padding: 20px 30px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+
+    .wrapper header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      color: #ccc;
+    }
+
+    .volume-slider input,
+    .keys-checkbox input {
+      accent-color: #aab6fe;
+    }
+
+    .piano-keys {
+      display: flex;
+      position: relative;
+    }
+
+    .key {
+      border: 1px solid #999;
+      user-select: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      font-size: 14px;
+      font-weight: bold;
+      color: #ccc;
+      position: relative;
+    }
+
+    .white {
+      width: 60px;
+      height: 200px;
+      background: white;
+      margin: 0 1px;
+      border-radius: 0 0 5px 5px;
+      color: #555;
+    }
+
+    .black {
+      width: 40px;
+      height: 120px;
+      background: black;
+      position: absolute;
+      z-index: 1;
+      margin: 0 -20px;
+      border-radius: 0 0 5px 5px;
+    }
+
+    .hide span {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <header>
+      <h2>Playable PIANO</h2>
+      <div style="display: flex; align-items: center; gap: 20px;">
+        <div class="volume-slider">
+          Volume <input type="range" min="0" max="1" step="0.01" value="1">
+        </div>
+        <div class="keys-checkbox">
+          Show Keys <input type="checkbox" checked>
+        </div>
+      </div>
+    </header>
+
+    <ul class="piano-keys">
+      <li class="key white" data-key="a"><span>A</span></li>
+      <li class="key black" data-key="w" style="left: 45px;"><span>W</span></li>
+      <li class="key white" data-key="s"><span>S</span></li>
+      <li class="key black" data-key="e" style="left: 105px;"><span>E</span></li>
+      <li class="key white" data-key="d"><span>D</span></li>
+      <li class="key white" data-key="f"><span>F</span></li>
+      <li class="key black" data-key="t" style="left: 225px;"><span>T</span></li>
+      <li class="key white" data-key="g"><span>G</span></li>
+      <li class="key black" data-key="y" style="left: 285px;"><span>Y</span></li>
+      <li class="key white" data-key="h"><span>H</span></li>
+      <li class="key black" data-key="u" style="left: 345px;"><span>U</span></li>
+      <li class="key white" data-key="j"><span>J</span></li>
+      <li class="key white" data-key="k"><span>K</span></li>
+      <li class="key black" data-key="o" style="left: 465px;"><span>O</span></li>
+      <li class="key white" data-key="l"><span>L</span></li>
+      <li class="key black" data-key="p" style="left: 525px;"><span>P</span></li>
+      <li class="key white" data-key=";"><span>;</span></li>
+    </ul>
+  </div>
+
+  <script>
+    const pianoKeys = document.querySelectorAll(".key");
+    const volumeSlider = document.querySelector(".volume-slider input");
+    const keysCheckbox = document.querySelector(".keys-checkbox input");
+
+    let audio = new Audio();
+    let volume = 1;
+
+    const playTune = key => {
+      audio.src = `tunes/${key}.mp3`;
+      audio.volume = volume;
+      audio.play();
+
+      const keyElement = document.querySelector(`.key[data-key="${key}"]`);
+      if (keyElement) {
+        keyElement.classList.add("active");
+        setTimeout(() => keyElement.classList.remove("active"), 150);
+      }
+    };
+
+    pianoKeys.forEach(key => {
+      key.addEventListener("click", () => playTune(key.dataset.key));
+    });
+
+    document.addEventListener("keydown", e => {
+      if (e.repeat) return;
+      const key = e.key.toLowerCase();
+      playTune(key);
+    });
+
+    volumeSlider.addEventListener("input", e => {
+      volume = e.target.value;
+    });
+
+    keysCheckbox.addEventListener("change", () => {
+      pianoKeys.forEach(key => key.classList.toggle("hide"));
+    });
+  </script>
+</body>
+</html>
