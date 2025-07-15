@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Playable Piano</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
     body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
@@ -42,16 +45,7 @@
       position: relative;
     }
 
-    .key {
-      border: 1px solid #999;
-      user-select: none;
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      font-size: 14px;
-      font-weight: bold;
-      color: #ccc;
+    .key-group {
       position: relative;
     }
 
@@ -59,9 +53,16 @@
       width: 60px;
       height: 200px;
       background: white;
-      margin: 0 1px;
+      border: 1px solid #999;
       border-radius: 0 0 5px 5px;
+      margin: 0 1px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
       color: #555;
+      font-weight: bold;
+      font-size: 14px;
+      z-index: 1;
     }
 
     .black {
@@ -69,9 +70,16 @@
       height: 120px;
       background: black;
       position: absolute;
-      z-index: 1;
-      margin: 0 -20px;
+      top: 0;
+      left: 40px;
+      z-index: 2;
       border-radius: 0 0 5px 5px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      color: #eee;
+      font-weight: bold;
+      font-size: 12px;
     }
 
     .hide span {
@@ -92,37 +100,56 @@
         </div>
       </div>
     </header>
-    <ul class="piano-keys">
-      <li class="key white" data-key="a"><span>A</span></li>
-      <li class="key black" data-key="w" style="left: 45px;"><span>W</span></li>
-      <li class="key white" data-key="s"><span>S</span></li>
-      <li class="key black" data-key="e" style="left: 105px;"><span>E</span></li>
-      <li class="key white" data-key="d"><span>D</span></li>
-      <li class="key white" data-key="f"><span>F</span></li>
-      <li class="key black" data-key="t" style="left: 225px;"><span>T</span></li>
-      <li class="key white" data-key="g"><span>G</span></li>
-      <li class="key black" data-key="y" style="left: 285px;"><span>Y</span></li>
-      <li class="key white" data-key="h"><span>H</span></li>
-      <li class="key black" data-key="u" style="left: 345px;"><span>U</span></li>
-      <li class="key white" data-key="j"><span>J</span></li>
-      <li class="key white" data-key="k"><span>K</span></li>
-      <li class="key black" data-key="o" style="left: 465px;"><span>O</span></li>
-      <li class="key white" data-key="l"><span>L</span></li>
-      <li class="key black" data-key="p" style="left: 525px;"><span>P</span></li>
-      <li class="key white" data-key=";"><span>;</span></li>
-    </ul>
-  </div>
 
+    <div class="piano-keys">
+      <div class="key-group">
+        <div class="white key" data-key="a"><span>A</span></div>
+        <div class="black key" data-key="w"><span>W</span></div>
+      </div>
+      <div class="key-group">
+        <div class="white key" data-key="s"><span>S</span></div>
+        <div class="black key" data-key="e"><span>E</span></div>
+      </div>
+      <div class="key-group">
+        <div class="white key" data-key="d"><span>D</span></div>
+      </div>
+      <div class="key-group">
+        <div class="white key" data-key="f"><span>F</span></div>
+        <div class="black key" data-key="t"><span>T</span></div>
+      </div>
+      <div class="key-group">
+        <div class="white key" data-key="g"><span>G</span></div>
+        <div class="black key" data-key="y"><span>Y</span></div>
+      </div>
+      <div class="key-group">
+        <div class="white key" data-key="h"><span>H</span></div>
+        <div class="black key" data-key="u"><span>U</span></div>
+      </div>
+      <div class="key-group">
+        <div class="white key" data-key="j"><span>J</span></div>
+      </div>
+      <div class="key-group">
+        <div class="white key" data-key="k"><span>K</span></div>
+        <div class="black key" data-key="o"><span>O</span></div>
+      </div>
+      <div class="key-group">
+        <div class="white key" data-key="l"><span>L</span></div>
+        <div class="black key" data-key="p"><span>P</span></div>
+      </div>
+      <div class="key-group">
+        <div class="white key" data-key=";"><span>;</span></div>
+      </div>
+    </div>
+  </div>
   <script>
     const pianoKeys = document.querySelectorAll(".key");
     const volumeSlider = document.querySelector(".volume-slider input");
     const keysCheckbox = document.querySelector(".keys-checkbox input");
 
-    let audio = new Audio();
     let volume = 1;
 
     const playTune = key => {
-      audio.src = `tunes/${key}.mp3`;
+      const audio = new Audio(`tunes/${key}.mp3`);
       audio.volume = volume;
       audio.play();
 
